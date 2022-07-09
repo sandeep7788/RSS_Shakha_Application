@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/c1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        app:cardCornerRadius="6dp"
+        android:elevation="4dp">
+
+        <LinearLayout
+            android:id="@+id/layoutShakha"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="3">
+
+            <TextView
+                android:id="@+id/txtShakaName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|left|left"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginBottom="12dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/intel"
+                android:foregroundGravity="center|left"
+                android:gravity="center|left|left"
+                android:textColor="@color/gpvch_black"
+                android:textSize="@dimen/txt_20sp" />
+
+            <TextView
+                android:id="@+id/txtTotalShaka"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|left|left"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="12dp"
+                android:layout_weight="2"
+                android:fontFamily="@font/intel"
+                android:foregroundGravity="center|left"
+                android:gravity="center"
+                android:lines="1"
+                android:textColor="@color/gpvch_black"
+                android:textSize="@dimen/txt_25sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+</layout>

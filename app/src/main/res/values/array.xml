@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="gender_array">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+    <string-array name="sakha_array">
+        <item>गंगानगर</item>
+        <item>बीकानेर</item>
+        <item>जैसलमेर</item>
+        <item>बाडमेर</item>
+        <item>जालोर</item>
+        <item>सिरोही</item>
+        <item>उदयपुर</item>
+        <item>डूंगरपुर</item>
+        <item>जयपुर</item>
+    </string-array>
+
+    <string-array name="bloodGroup_array">
+        <item>A+</item>
+        <item>A-</item>
+        <item>AB+</item>
+        <item>AB-</item>
+        <item>b+</item>
+        <item>B-</item>
+        <item>O+</item>
+        <item>O-</item>
+    </string-array>
+
+    <string-array name="education_array">
+        <item>नहीं</item>
+        <item>प्रारंभिक</item>
+        <item>प्रथम</item>
+        <item>द्वितीय</item>
+        <item>तृतीय</item>
+    </string-array>
+</resources>

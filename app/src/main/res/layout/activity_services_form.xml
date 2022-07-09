@@ -1,0 +1,994 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/nev_bg_color"
+        android:orientation="vertical"
+        tools:context=".AppointmentActivity">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/layout_toolbar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/background">
+        <LinearLayout
+            android:id="@+id/ly_sign_up"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/signin_round_shape"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/white_color"
+            android:elevation="@dimen/txt_15sp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="35dp"
+                android:fontFamily="@font/intel"
+                android:foregroundGravity="center"
+                android:text="@string/name"
+                android:textColor="@color/gpvch_black"
+                android:textSize="@dimen/txt_15sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/layoutName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="35dp"
+                android:background="@drawable/edit_txtbg"
+                android:orientation="horizontal"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp">
+
+                <EditText
+                    android:id="@+id/edtName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|start"
+                    android:layout_marginStart="16dp"
+                    android:backgroundTint="@color/button_bg"
+                    android:fontFamily="@font/intel"
+                    android:gravity="top|start"
+                    android:hint="@string/name"
+                    android:inputType="textPersonName"
+                    android:lines="1"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/txt_hint"
+                    android:textSize="@dimen/text_nev"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="@dimen/txt_15sp"
+                android:fontFamily="@font/intel"
+                android:foregroundGravity="center"
+                android:text="@string/lastName"
+                android:textColor="@color/gpvch_black"
+                android:textSize="@dimen/txt_15sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/layoutLastName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="35dp"
+                android:background="@drawable/edit_txtbg"
+                android:orientation="horizontal"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp">
+
+                <EditText
+                    android:id="@+id/edtLastName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|start"
+                    android:layout_marginStart="16dp"
+                    android:backgroundTint="@color/button_bg"
+                    android:fontFamily="@font/intel"
+                    android:gravity="top|start"
+                    android:hint="@string/lastName"
+                    android:inputType="textPersonName"
+                    android:lines="1"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/txt_hint"
+                    android:textSize="@dimen/text_nev"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="@dimen/txt_15sp"
+                android:fontFamily="@font/intel"
+                android:foregroundGravity="center"
+                android:text="@string/business"
+                android:textColor="@color/gpvch_black"
+                android:textSize="@dimen/txt_15sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/layoutBusiness"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="35dp"
+                android:background="@drawable/edit_txtbg"
+                android:orientation="horizontal"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp">
+
+                <EditText
+                    android:id="@+id/edtBusiness"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|start"
+                    android:layout_marginStart="16dp"
+                    android:backgroundTint="@color/button_bg"
+                    android:fontFamily="@font/intel"
+                    android:gravity="top|start"
+                    android:hint="@string/business"
+                    android:inputType="text"
+                    android:lines="1"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/txt_hint"
+                    android:textSize="@dimen/text_nev"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="@dimen/txt_15sp"
+                android:fontFamily="@font/intel"
+                android:foregroundGravity="center"
+                android:text="@string/address"
+                android:textColor="@color/gpvch_black"
+                android:textSize="@dimen/txt_15sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/layoutAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="35dp"
+                android:background="@drawable/edit_txtbg"
+                android:orientation="horizontal"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp">
+
+                <EditText
+                    android:id="@+id/edtAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|start"
+                    android:layout_marginStart="16dp"
+                    android:backgroundTint="@color/button_bg"
+                    android:fontFamily="@font/intel"
+                    android:gravity="top|start"
+                    android:hint="@string/address_lenght"
+                    android:maxLength="400"
+                    android:maxLines="4"
+                    android:minLines="3"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/txt_hint"
+                    android:textSize="@dimen/text_nev"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="@dimen/txt_15sp"
+                android:fontFamily="@font/intel"
+                android:foregroundGravity="center"
+                android:text="@string/mobileNumber"
+                android:textColor="@color/gpvch_black"
+                android:textSize="@dimen/txt_15sp"
+                android:textStyle="bold" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="35dp"
+                android:clickable="true"
+                android:orientation="horizontal"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp">
+
+                <TextView
+                    android:id="@+id/edt_number_code1"
+                    android:layout_width="55dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/edit_txtbg"
+                    android:clickable="true"
+                    android:editable="false"
+                    android:enabled="false"
+                    android:focusable="false"
+                    android:fontFamily="@font/intel"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:maxLength="3"
+                    android:text="+91"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/text_nev"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/edtMobileNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="67dp"
+                    android:background="@drawable/edit_txtbg"
+                    android:clickable="true"
+                    android:fontFamily="@font/intel"
+                    android:gravity="center|start"
+                    android:inputType="phone"
+                    android:maxLength="10"
+                    android:paddingStart="15dp"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/txt_hint"
+                    android:textSize="@dimen/text_nev"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="@dimen/txt_15sp"
+                android:fontFamily="@font/intel"
+                android:foregroundGravity="center"
+                android:text="@string/mobileNumberWhatsApp"
+                android:textColor="@color/gpvch_black"
+                android:textSize="@dimen/txt_15sp"
+                android:textStyle="bold" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="35dp"
+                android:clickable="true"
+                android:orientation="horizontal"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp">
+
+                <TextView
+                    android:id="@+id/edt_number_code2"
+                    android:layout_width="55dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/edit_txtbg"
+                    android:clickable="true"
+                    android:editable="false"
+                    android:enabled="false"
+                    android:focusable="false"
+                    android:fontFamily="@font/intel"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:maxLength="3"
+                    android:text="+91"
+                    android:textColor="@color/text_color"
+                    android:textSize="@dimen/text_nev"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/edtWhatsAppMobileNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="67dp"
+                    android:background="@drawable/edit_txtbg"
+                    android:clickable="true"
+                    android:fontFamily="@font/intel"
+                    android:gravity="center|start"
+                    android:inputType="phone"
+                    android:maxLength="10"
+                    android:paddingStart="15dp"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/txt_hint"
+                    android:textSize="@dimen/text_nev"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="@dimen/txt_15sp"
+                android:fontFamily="@font/intel"
+                android:foregroundGravity="center"
+                android:text="@string/dateOfBirth"
+                android:textColor="@color/gpvch_black"
+                android:textSize="@dimen/txt_15sp"
+                android:textStyle="bold" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_dob"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="35dp"
+                android:layout_marginLeft="35dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="35dp"
+                android:background="@drawable/edit_txtbg"
+                android:clickable="true"
+                android:orientation="horizontal"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp">
+
+                <TextView
+                    android:id="@+id/txt_date_of_birth"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginRight="36dp"
+                    android:backgroundTint="@color/button_bg"
+                    android:clickable="true"
+                    android:drawableRight="@drawable/calender_icon"
+                    android:fontFamily="@font/intel"
+                    android:hint="@string/dateOfBirth"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/txt_hint"
+                    android:textSize="@dimen/text_nev"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="@dimen/txt_15sp"
+                android:fontFamily="@font/intel"
+                android:foregroundGravity="center"
+                android:text="@string/bloodGroup"
+                android:textColor="@color/gpvch_black"
+                android:textSize="@dimen/txt_15sp"
+                android:textStyle="bold" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_1"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="35dp"
+                android:background="@drawable/edit_txtbg"
+                android:clickable="true"
+                android:orientation="horizontal"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp">
+
+                <TextView
+                    android:id="@+id/spinner_hint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:backgroundTint="@color/button_bg"
+                    android:clickable="true"
+                    android:elevation="4dp"
+                    android:fontFamily="@font/intel"
+                    android:hint="@string/bloodGroup"
+                    android:textColor="@color/text_color"
+                    android:textColorHint="@color/txt_hint"
+                    android:textSize="@dimen/text_nev"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Spinner
+                    android:id="@+id/spinnerBloodGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginRight="36dp"
+                    android:backgroundTint="@color/button_bg"
+                    android:fontFamily="@font/intel"
+                    android:hint="@string/bloodGroup"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_nev"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imageView8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginRight="36dp"
+                    android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="@dimen/txt_15sp"
+                android:fontFamily="@font/intel"
+                android:foregroundGravity="center"
+                android:text="@string/education"
+                android:textColor="@color/gpvch_black"
+                android:textSize="@dimen/txt_15sp"
+                android:textStyle="bold" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="35dp"
+                android:background="@drawable/edit_txtbg"
+                android:clickable="true"
+                android:orientation="horizontal"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp">
+
+                <TextView
+                    android:id="@+id/spinnerHintEducation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:backgroundTint="@color/button_bg"
+                    android:background="@color/button_bg"
+                    android:clickable="true"
+                    android:elevation="4dp"
+                    android:fontFamily="@font/intel"
+                    android:hint="@string/education"
+                    android:textColor="@color/text_color"
+                    android:textColorHint="@color/txt_hint"
+                    android:textSize="@dimen/text_nev"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Spinner
+                    android:id="@+id/spinnerEducation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginRight="36dp"
+                    android:backgroundTint="@color/button_bg"
+                    android:fontFamily="@font/intel"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_nev"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginRight="36dp"
+                    android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="@dimen/txt_15sp"
+                android:fontFamily="@font/intel"
+                android:foregroundGravity="center"
+                android:text="@string/educationYear"
+                android:textColor="@color/gpvch_black"
+                android:textSize="@dimen/txt_15sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/layoutEducationYear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="35dp"
+                android:background="@drawable/edit_txtbg"
+                android:orientation="horizontal"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp">
+
+                <EditText
+                    android:id="@+id/edtEducationYear"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|start"
+                    android:layout_marginStart="16dp"
+                    android:backgroundTint="@color/button_bg"
+                    android:fontFamily="@font/intel"
+                    android:gravity="top|start"
+                    android:hint="@string/educationYear"
+                    android:inputType="number"
+                    android:lines="1"
+                    android:maxLength="4"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/txt_hint"
+                    android:textSize="@dimen/text_nev"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="@dimen/txt_15sp"
+                android:fontFamily="@font/intel"
+                android:foregroundGravity="center"
+                android:text="@string/CurrentLiabilities"
+                android:textColor="@color/gpvch_black"
+                android:textSize="@dimen/txt_15sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/layoutCurrentLiabilities"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="35dp"
+                android:background="@drawable/edit_txtbg"
+                android:orientation="horizontal"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp">
+
+                <EditText
+                    android:id="@+id/edtCurrentLiabilities"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|start"
+                    android:layout_marginStart="16dp"
+                    android:backgroundTint="@color/button_bg"
+                    android:fontFamily="@font/intel"
+                    android:gravity="top|start"
+                    android:hint="@string/CurrentLiabilities"
+                    android:inputType="text"
+                    android:maxLines="3"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/txt_hint"
+                    android:textSize="@dimen/text_nev"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="@dimen/txt_15sp"
+                android:fontFamily="@font/intel"
+                android:foregroundGravity="center"
+                android:text="@string/pledged"
+                android:textColor="@color/gpvch_black"
+                android:textSize="@dimen/txt_15sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="35dp"
+                android:background="@drawable/edit_txtbg"
+                android:orientation="horizontal"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp">
+
+                <RadioGroup
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    android:id="@+id/radioPledged"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <RadioButton
+                        android:layout_marginStart="16dp"
+                        android:id="@+id/radioPledgedYes"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="start|center"
+                        android:layout_height="wrap_content"
+                        android:text="@string/yes"
+                        android:buttonTint="@color/theme_color2"
+                        android:checked="true" />
+
+                    <RadioButton
+                        android:layout_marginEnd="16dp"
+                        android:layout_gravity="start|center"
+                        android:layout_weight="1"
+                        android:gravity="start|center"
+                        android:id="@+id/radioPledgedNo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/no"
+                        android:buttonTint="@color/theme_color2"/>
+
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="@dimen/txt_15sp"
+                android:fontFamily="@font/intel"
+                android:foregroundGravity="center"
+                android:text="@string/ghoshi"
+                android:textColor="@color/gpvch_black"
+                android:textSize="@dimen/txt_15sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="35dp"
+                android:background="@drawable/edit_txtbg"
+                android:orientation="horizontal"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp">
+
+                <RadioGroup
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    android:id="@+id/radioGhoshi"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <RadioButton
+                        android:layout_marginStart="16dp"
+                        android:id="@+id/radioGhoshiYes"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="start|center"
+                        android:layout_height="wrap_content"
+                        android:text="@string/yes"
+                        android:buttonTint="@color/theme_color2"
+                        android:checked="true" />
+
+                    <RadioButton
+                        android:layout_marginEnd="16dp"
+                        android:layout_gravity="start|center"
+                        android:layout_weight="1"
+                        android:gravity="start|center"
+                        android:id="@+id/radioGhoshiNo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/no"
+                        android:buttonTint="@color/theme_color2"/>
+
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1.5dp"
+                android:background="@color/theme_color2"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="35dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="@dimen/txt_15sp"
+                android:fontFamily="@font/intel"
+                android:foregroundGravity="center"
+                android:text="@string/legalOrganization"
+                android:textColor="@color/gpvch_black"
+                android:textSize="@dimen/txt_20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="@dimen/txt_15sp"
+                android:fontFamily="@font/intel"
+                android:foregroundGravity="center"
+                android:text="@string/present"
+                android:textColor="@color/gpvch_black"
+                android:textSize="@dimen/txt_15sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/layoutPresent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="35dp"
+                android:background="@drawable/edit_txtbg"
+                android:orientation="horizontal"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp">
+
+                <EditText
+                    android:id="@+id/edtPresent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|start"
+                    android:layout_marginStart="16dp"
+                    android:backgroundTint="@color/button_bg"
+                    android:fontFamily="@font/intel"
+                    android:gravity="top|start"
+                    android:hint="@string/present"
+                    android:inputType="text"
+                    android:maxLines="3"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/txt_hint"
+                    android:textSize="@dimen/text_nev"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="@dimen/txt_15sp"
+                android:fontFamily="@font/intel"
+                android:foregroundGravity="center"
+                android:text="@string/east"
+                android:textColor="@color/gpvch_black"
+                android:textSize="@dimen/txt_15sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/layoutEast"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="35dp"
+                android:background="@drawable/edit_txtbg"
+                android:orientation="horizontal"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp">
+
+                <EditText
+                    android:id="@+id/edtEast"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|start"
+                    android:layout_marginStart="16dp"
+                    android:backgroundTint="@color/button_bg"
+                    android:fontFamily="@font/intel"
+                    android:gravity="top|start"
+                    android:hint="@string/east"
+                    android:inputType="text"
+                    android:maxLines="3"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/txt_hint"
+                    android:textSize="@dimen/text_nev"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
+
+
+
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="@dimen/txt_15sp"
+                android:fontFamily="@font/intel"
+                android:foregroundGravity="center"
+                android:text="@string/other"
+                android:textColor="@color/gpvch_black"
+                android:textSize="@dimen/txt_15sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/layoutOther"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="35dp"
+                android:background="@drawable/edit_txtbg"
+                android:orientation="horizontal"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp">
+
+                <EditText
+                    android:id="@+id/edtOther"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|start"
+                    android:layout_marginStart="16dp"
+                    android:backgroundTint="@color/button_bg"
+                    android:fontFamily="@font/intel"
+                    android:gravity="top|start"
+                    android:hint="@string/other_lenght"
+                    android:maxLength="400"
+                    android:maxLines="4"
+                    android:minLines="3"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/txt_hint"
+                    android:textSize="@dimen/text_nev"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
+
+            </LinearLayout>
+
+
+            <Button
+                android:id="@+id/btn_submit"
+                android:layout_width="match_parent"
+                android:layout_height="51dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="36dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="36dp"
+                android:layout_marginBottom="?actionBarSize"
+                android:background="@drawable/round_corner_shape"
+                android:backgroundTint="@color/theme_color"
+                android:text="@string/submit"
+                android:textColor="@color/white" />
+
+
+        </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+    </LinearLayout>
+</layout>
