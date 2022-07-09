@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.rss.rss_application">
+    package="com.rss.suchi">
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -32,20 +32,20 @@
         android:launchMode="singleInstance">
 
         <activity
-            android:name=".activity.ShakaLisActivity"
+            android:name="com.rss.suchi.activity.ShakaLisActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.ShakaUserListActivity"
+            android:name="com.rss.suchi.activity.ShakaUserListActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.AttendanceFormActivity"
+            android:name="com.rss.suchi.activity.AttendanceFormActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name="com.rss.suchi.MainActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".activity.SplashScreen"
+            android:name="com.rss.suchi.activity.SplashScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -54,13 +54,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.SignInActivity"
+            android:name="com.rss.suchi.activity.SignInActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.NotificationListActivity"
+            android:name="com.rss.suchi.activity.NotificationListActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.ServicesForm"
+            android:name="com.rss.suchi.activity.ServicesForm"
             android:exported="true" />
     </application>
 

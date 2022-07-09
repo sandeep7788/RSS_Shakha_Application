@@ -11,7 +11,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.rss.rss_application"
+        applicationId "com.rss.suchi"
         minSdk 21
         targetSdk 32
         versionCode 1
