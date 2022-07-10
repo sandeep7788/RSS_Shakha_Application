@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.cbi_solar.helper.ApiContants
+import com.cbi_solar.helper.ApiContants.isDeleted
 import com.cbi_solar.helper.MyApplication
 import com.cbi_solar.helper.Utility
 import com.google.gson.JsonObject
@@ -306,6 +307,7 @@ class ServicesForm : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                             pDialog.setConfirmClickListener {
                                 pDialog.dismiss()
                                 val intent = intent
+                                intent.putExtra(isDeleted,true)
                                 setResult(RESULT_OK, intent)
                                 finish()
                             }
@@ -437,11 +439,7 @@ class ServicesForm : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                     Utility.showSnackBar(this, "कृपया जन्म तिथि चुनें")
                     binding.layoutDob.setBackgroundResource(R.drawable.edit_txt_error)
                 }
-//                binding.edtEducation.text.isEmpty() -> {
-//                    Utility.showSnackBar(this, "कृपया शिक्षण दर्ज करें")
-//                    binding.layoutEducation.setBackgroundResource(R.drawable.edit_txt_error)
-//                }
-                binding.edtEducationYear.text.isEmpty() -> {
+                binding.edtEducationYear.text.isEmpty() &&  binding.spinnerEducation.selectedItemPosition != 0 -> {
                     Utility.showSnackBar(this, "कृपया शिक्षण वर्ष दर्ज करें")
                     binding.layoutEducationYear.setBackgroundResource(R.drawable.edit_txt_error)
                 }

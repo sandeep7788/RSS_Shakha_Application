@@ -1,11 +1,13 @@
 package com.rss.suchi.activity
 
 import android.app.Activity
+import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -16,12 +18,14 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.bumptech.glide.request.RequestOptions
 import com.cbi_solar.helper.ApiContants
+import com.cbi_solar.helper.ApiContants.PREF_getExcel
 import com.cbi_solar.helper.MyApplication
 import com.cbi_solar.helper.Utility
 import com.rss.suchi.R
 import com.rss.suchi.adapter.ShakaUserAdapter
 import com.rss.suchi.databinding.ActivityShakaLisBinding
 import com.rss.suchi.helper.ApiInterface
+import com.rss.suchi.helper.DownloadTask
 import com.rss.suchi.helper.RestClient
 import com.rss.suchi.helper.VerticalSpacingItemDecorator
 import com.rss.suchi.model.ShakaUser
@@ -39,7 +43,6 @@ class ShakaUserListActivity : AppCompatActivity() {
     private lateinit var binding: ActivityShakaLisBinding
     private var shakaUserList: ArrayList<ShakaUser> = ArrayList()
     private var ss_id = 0
-    val REQUEST_CODE = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,6 +55,7 @@ class ShakaUserListActivity : AppCompatActivity() {
         progressDialog!!.progressHelper.barColor = R.color.theme_color
         progressDialog!!.titleText = "Loading ..."
         progressDialog!!.setCancelable(false)
+        binding.toolbar.imgDownload.visibility = View.VISIBLE
 
         initShakaListRecyclerView()
 
@@ -60,8 +64,10 @@ class ShakaUserListActivity : AppCompatActivity() {
     }
 
     private fun clickListener() {
-        binding.toolbar.imgBack.setOnClickListener { finish() }
-
+        binding.toolbar.imgBack.setOnClickListener { onBackPressed() }
+        binding.toolbar.imgDownload.setOnClickListener {
+            downloadFile()
+        }
         binding.searchView.addTextChangedListener(object : TextWatcher {
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
             }
@@ -74,6 +80,20 @@ class ShakaUserListActivity : AppCompatActivity() {
             }
         })
 
+    }
+    private fun downloadFile(){
+        val mProgressDialog: ProgressDialog = ProgressDialog(this@ShakaUserListActivity)
+        mProgressDialog.setMessage("A message")
+        mProgressDialog.isIndeterminate = true
+        mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL)
+        mProgressDialog.setCancelable(true)
+
+        val downloadTask = DownloadTask(this@ShakaUserListActivity, mProgressDialog)
+        downloadTask.execute("$PREF_getExcel?shakha_id="+ss_id.toString().trim())
+
+        mProgressDialog.setOnCancelListener {
+            downloadTask.cancel(true) //cancel the task
+        }
     }
 
     private fun initShakaListRecyclerView() {
@@ -186,11 +206,24 @@ class ShakaUserListActivity : AppCompatActivity() {
             resources.getString(R.string.error)
         )
     }
+    var isUserDeleted = false
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == RESULT_OK) {
             getFormList(ss_id)
+
+            if (data != null && data?.getBooleanExtra(ApiContants.isDeleted,false) != null)
+                isUserDeleted = data?.getBooleanExtra(ApiContants.isDeleted,false) == true
         }
     }
 
+    override fun onBackPressed() {
+
+        if (isUserDeleted) {
+            val intent = intent
+            setResult(RESULT_OK, intent)
+        }
+
+        finish()
+    }
 }

@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 import com.rss.suchi.model.ShakaUserListModel;
 import com.rss.suchi.model.ViewRegistrationUserModel;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
@@ -43,6 +44,9 @@ public interface ApiInterface {
 
     @GET(ApiContants.PREF_dashboard)
     Call<JsonObject> dashboardShakaList(@Query("id") Integer id);
+
+    @GET(ApiContants.PREF_getExcel)
+    Call<ResponseBody> getExcel(@Query("shakha_id") Integer shakha_id);
 
 //    @FormUrlEncoded
 //    @Headers("Content-Type: application/json")

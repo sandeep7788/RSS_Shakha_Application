@@ -1,9 +1,11 @@
 package com.rss.suchi
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
@@ -12,6 +14,8 @@ import android.view.Gravity
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
@@ -27,6 +31,7 @@ import com.rss.suchi.helper.ApiInterface
 import com.rss.suchi.helper.RestClient
 import com.rss.suchi.model.DashBoardShakaList
 import com.rss.suchi.model.ShakaUser
+import com.rss.suchi.model.ShakaUserListModel
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
@@ -39,9 +44,8 @@ class MainActivity : AppCompatActivity() {
     private var TAG = "@@MainActivity"
     private var progressDialog: SweetAlertDialog? = null
     private lateinit var binding: ActivityMainBinding
-    private var shakaUserList: ArrayList<ShakaUser> = ArrayList()
-    val allShakhaList: ArrayList<DashBoardShakaList> = ArrayList()
     private var exit = false
+    private var REQUEST_CODE = 101
 
     @SuppressLint("WrongConstant")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,7 +63,7 @@ class MainActivity : AppCompatActivity() {
 
         setData()
         clickListener()
-
+        checkAccess()
     }
 
     private fun closeDrawerBar() {
@@ -78,7 +82,9 @@ class MainActivity : AppCompatActivity() {
         binding.includeNavigation.isMskUser = MyApplication.readBoolPreferences(ApiContants.isMskUser)
 
 
-        getDashboardData()
+        if (MyApplication.readBoolPreferences(ApiContants.isMskUser)){
+            getFormListSize(MyApplication.ReadIntPreferences(ApiContants.PREF_USER_SHAKA)!!)
+        } else getDashboardData()
 
     }
 
@@ -142,7 +148,7 @@ class MainActivity : AppCompatActivity() {
         }
         binding.includeNavigation.layoutForm.setOnClickListener {
             closeDrawerBar()
-            startActivity(Intent(this@MainActivity, ServicesForm::class.java))
+            startActivityForResult(Intent(this@MainActivity, ServicesForm::class.java), REQUEST_CODE)
         }
         binding.includeNavigation.layoutAttendanceForm.setOnClickListener {
             closeDrawerBar()
@@ -166,7 +172,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.layoutShakhaList.setOnClickListener {
             closeDrawerBar()
-            startActivity(Intent(this@MainActivity, ShakaUserListActivity::class.java))
+            startActivityForResult(Intent(this@MainActivity, ShakaUserListActivity::class.java),REQUEST_CODE)
         }
 
         binding.layoutTotalShaka.setOnClickListener {
@@ -214,7 +220,6 @@ class MainActivity : AppCompatActivity() {
                             var totalSevak = jsonObject.getInt("toatl_swayam_sevak").toString()
                             binding.txtTotalShaka.text = jsonObject.getInt("total_shaka").toString()
                             binding.txtTotalSwayamSevak.text = totalSevak
-                            binding.txtTotalSwayamSevakTwo.text = totalSevak
                             binding.txtPresent.text = jsonObject.getInt("present").toString()
                         } else showErrorDialog()
 
@@ -257,5 +262,94 @@ class MainActivity : AppCompatActivity() {
             SweetAlertDialog.WARNING_TYPE,
             resources.getString(R.string.error)
         )
+    }
+    private fun checkAccess(){
+        if (ContextCompat.checkSelfPermission(
+                this@MainActivity,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            )
+            != PackageManager.PERMISSION_GRANTED
+        ) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(
+                    this@MainActivity,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+                )
+            ) {
+            } else {
+                requestPermissionForReadExternalStorage()
+            }
+        }
+
+    }
+    @Throws(java.lang.Exception::class)
+    fun requestPermissionForReadExternalStorage() {
+        try {
+            ActivityCompat.requestPermissions(
+                context, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE),
+                101
+            )
+        } catch (e: java.lang.Exception) {
+            e.printStackTrace()
+            throw e
+        }
+    }
+
+    private fun getFormListSize(id:Int) {
+        progressDialog!!.show()
+
+        val apiService: ApiInterface =
+            RestClient().getClient(context)!!.create(ApiInterface::class.java)
+        val call: Call<ShakaUserListModel> =
+            apiService.viewshakhauser(id)
+        call.enqueue(object : Callback<ShakaUserListModel?> {
+            override fun onResponse(
+                call: Call<ShakaUserListModel?>,
+                response: Response<ShakaUserListModel?>
+            ) {
+                Log.e(TAG, "onResponse:1 " + response.body().toString())
+                try {
+                    if (response.isSuccessful && response.body() != null && response.body()?.data != null) {
+                        binding.txtTotalSwayamSevakTwo.setText(response.body()?.data?.size.toString())
+                    } else {
+                        Utility.showDialog(
+                            context,
+                            SweetAlertDialog.WARNING_TYPE,
+                            "सूची खाली है"
+                        )
+                    }
+
+                } catch (e: Exception) {
+                    Log.d(TAG, "onResponse: " + e.message.toString())
+                    showErrorDialog()
+
+                    Toast.makeText(
+                        context,
+                        " " + resources.getString(R.string.error),
+                        Toast.LENGTH_LONG
+                    )
+                        .show()
+                }
+                progressDialog!!.dismiss()
+            }
+
+            override fun onFailure(call: Call<ShakaUserListModel?>, t: Throwable) {
+
+                if (Utility.isNetworkAvailable(context)) {
+                    Log.e(TAG, "onFailure: " + t.message)
+                    Utility.showDialog(
+                        context,
+                        SweetAlertDialog.WARNING_TYPE,
+                        "सूची खाली है! कृपया बाद में कोशिश करें।"
+                    )
+                }
+                progressDialog!!.dismiss()
+            }
+        })
+    }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == RESULT_OK) {
+            setData()
+        }
     }
 }

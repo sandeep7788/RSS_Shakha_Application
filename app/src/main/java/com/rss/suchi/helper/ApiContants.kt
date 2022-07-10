@@ -11,6 +11,7 @@ object ApiContants {
         const val PREF_viewuser = "viewuser"
         const val PREF_deletess = "deletess"
         const val PREF_dashboard = "dashboard"
+        const val PREF_getExcel = PREF_base_url + "getExcel"
         const val PREF_attandance = "attandance"
         const val PREF_profileupdate = "profileupdate"
         const val PREF_passwordchange = "passwordchange"
@@ -30,6 +31,7 @@ object ApiContants {
         const val id = "id"
         const val login = "login"
         const val isMskUser = "isMskUser"
+        const val isDeleted = "isDeleted"
 
         const val PREF_USER_NAME= "PREF_USER_NAME"
         const val PREF_F_name = "PREF_F_name"

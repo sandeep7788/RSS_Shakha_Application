@@ -26,16 +26,19 @@ import android.util.Log
 import android.view.*
 import android.view.animation.AnimationUtils
 import android.view.inputmethod.InputMethodManager
-import android.widget.*
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
+import com.rss.suchi.R
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
-import com.rss.suchi.R
 
 class Utility {
     companion object {
@@ -583,6 +586,16 @@ class Utility {
                 context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
             return connectivityManager.activeNetworkInfo != null && connectivityManager.activeNetworkInfo!!
                 .isConnected
+        }
+        fun getCurrentTimeStamp(): String? {
+            return try {
+                val dateFormat =
+                    SimpleDateFormat("yyyy_MM_dd_HH_mm_ss")
+                dateFormat.format(Date())
+            } catch (e: java.lang.Exception) {
+                e.printStackTrace()
+                null
+            }
         }
     }
 

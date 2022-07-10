@@ -55,4 +55,6 @@
     <string name="totalSwayamsevak">कुल स्वयंसेवक</string>
     <string name="swayamsevak">स्वयं सेवक</string>
     <string name="search">सूची से खोजें</string>
+    <string name="presence">उपस्थित</string>
+    <string name="File_downloaded">फ़ाइल डाउनलोड की गई</string>
 </resources>

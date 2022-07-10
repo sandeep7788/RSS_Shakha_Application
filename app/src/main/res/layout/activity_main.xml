@@ -342,7 +342,7 @@
                                             android:foregroundGravity="center|left"
                                             android:gravity="center|left|left"
                                             android:lines="1"
-                                            android:text="@string/present"
+                                            android:text="@string/presence"
                                             android:textColor="@color/gpvch_black"
                                             android:textSize="@dimen/txt_25sp" />
 
