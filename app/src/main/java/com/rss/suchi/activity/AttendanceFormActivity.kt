@@ -25,6 +25,7 @@ import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.text.SimpleDateFormat
 import java.util.*
 
 class AttendanceFormActivity : AppCompatActivity() {
@@ -114,15 +115,13 @@ class AttendanceFormActivity : AppCompatActivity() {
             this,
             R.style.DialogTheme,
             DatePickerDialog.OnDateSetListener { view2, thisYear, thisMonth, thisDay ->
-                thisAMonth = thisMonth + 1
-                thisADay = thisDay
-                thisAYear = thisYear
+                val calendar = Calendar.getInstance()
+                calendar[thisYear, thisMonth] = thisDay
 
-                txtView.text = thisDay.toString() + "-" + thisAMonth + "-" + thisYear
-                val newDate: Calendar = Calendar.getInstance()
-                newDate.set(thisYear, thisMonth, thisDay)
-//                mh.entryDate = newDate.timeInMillis // setting new date
-//                    Log.e("@@date1", newDate.timeInMillis.toString() + " ")
+                val dateFormat = SimpleDateFormat("dd-MM-yyyy")
+                val dateString = dateFormat.format(calendar.getTime())
+
+                txtView.text = dateString
             },
             thisAYear,
             thisAMonth,

@@ -2,6 +2,7 @@ package com.rss.suchi.activity
 
 import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -61,8 +62,16 @@ class SignInActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         binding.btnSignUp.setOnClickListener {
             Utility.showSnackBar(this, "बाद में कोशिश करें।")
         }
-    }
 
+        binding.btnPrivacyPolicy.setOnClickListener {
+            startActivity(
+                Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse(ApiContants.PREF_privacypolicy)
+                )
+            )
+        }
+    }
 
     private fun signIn() {
         progressDialog!!.show()
@@ -185,7 +194,7 @@ class SignInActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         progressDialog!!.setCancelable(false)
 
         clickListener()
-        setSakhaList(binding.spinnerSakha)
+//        setSakhaList(binding.spinnerSakha)
 
     }
 

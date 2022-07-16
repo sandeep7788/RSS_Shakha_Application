@@ -21,7 +21,7 @@ object ApiContants {
         const val PREF_banner_list = "banner_list"
         const val PREF_ser_req_status = "ser_req_status"
         const val PREF_winner_list = "winner_list"
-        const val PREF_privacypolicy = "https://www.rss.org/"
+        const val PREF_privacypolicy = "https://rss.com/privacy-policy/"
 
         const val PREF_UserAPI = "userAPI"
         const val PREF_ClinicAPI = "clinicAPI"

@@ -367,13 +367,18 @@ class ServicesForm : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             this,
             R.style.DialogTheme,
             DatePickerDialog.OnDateSetListener { view2, thisYear, thisMonth, thisDay ->
-                thisAMonth = thisMonth + 1
-                thisADay = thisDay
-                thisAYear = thisYear
+//                thisAMonth = thisMonth + 1
+//                thisADay = thisDay
+//                thisAYear = thisYear
+//txtView.text = thisDay.toString() + "-" + thisAMonth + "-" + thisYear
+//
+                val calendar = Calendar.getInstance()
+                calendar[thisYear, thisMonth] = thisDay
 
-                txtView.text = thisDay.toString() + "-" + thisAMonth + "-" + thisYear
-                val newDate: Calendar = Calendar.getInstance()
-                newDate.set(thisYear, thisMonth, thisDay)
+                val dateFormat = SimpleDateFormat("dd-MM-yyyy")
+                val dateString = dateFormat.format(calendar.getTime())
+
+                txtView.text = dateString
 //                mh.entryDate = newDate.timeInMillis // setting new date
 //                    Log.e("@@date1", newDate.timeInMillis.toString() + " ")
             },

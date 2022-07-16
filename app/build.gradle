@@ -14,8 +14,8 @@ android {
         applicationId "com.rss.suchi"
         minSdk 21
         targetSdk 32
-        versionCode 1
-        versionName "1.0"
+        versionCode 3
+        versionName "3.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -64,6 +64,7 @@ dependencies {
     implementation 'com.ouattararomuald:slider-picasso:3.0.1'
 
     implementation 'de.hdodenhof:circleimageview:3.1.0'
-
+    implementation 'org.jsoup:jsoup:1.10.2'
 
 }
+//password javajava

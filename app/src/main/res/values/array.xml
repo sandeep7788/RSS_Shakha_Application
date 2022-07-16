@@ -5,15 +5,39 @@
         <item>Female</item>
     </string-array>
     <string-array name="sakha_array">
-        <item>गंगानगर</item>
+        <item>अजमेर</item>
+        <item>अलवर</item>
         <item>बीकानेर</item>
-        <item>जैसलमेर</item>
-        <item>बाडमेर</item>
-        <item>जालोर</item>
-        <item>सिरोही</item>
-        <item>उदयपुर</item>
-        <item>डूंगरपुर</item>
+        <item>बाड़मेर</item>
+        <item>बांसवाड़ा</item>
+        <item>भरतपुर</item>
+        <item>बारां</item>
+        <item>बूंदी</item>
+        <item>भीलवाड़ा</item>
+        <item>चुरू</item>
+        <item>चित्तौड़गढ़</item>
+        <item>दौसा</item>
+        <item>धौलपुर</item>
+        <item>डूंगापुर</item>
+        <item>गंगानगर</item>
+        <item>हनुमानगढ़</item>
+        <item>झुंझुनू</item>
+        <item>जालौर</item>
+        <item>जोधपुर</item>
         <item>जयपुर</item>
+        <item>जैसलमेर</item>
+        <item>झालावाड़</item>
+        <item>करौली</item>
+        <item>कोटा</item>
+        <item>नागौर</item>
+        <item>पाली</item>
+        <item>प्रतापगढ़</item>
+        <item>राजसमंद</item>
+        <item>सीकर</item>
+        <item>सवाई माधोपुर</item>
+        <item>सिरोही</item>
+        <item>टोंक</item>
+        <item>उदयपुर</item>
     </string-array>
 
     <string-array name="bloodGroup_array">
@@ -29,7 +53,7 @@
 
     <string-array name="education_array">
         <item>नहीं</item>
-        <item>प्रारंभिक</item>
+        <item>प्राथमिक</item>
         <item>प्रथम</item>
         <item>द्वितीय</item>
         <item>तृतीय</item>

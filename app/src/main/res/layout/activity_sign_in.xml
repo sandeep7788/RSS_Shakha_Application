@@ -256,32 +256,53 @@
                         android:textColor="@color/button_bg"
                         android:fontFamily="@font/intel"/>
 
-<!--                    <TextView
-                        android:id="@+id/txt_forgot_password"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="24dp"
-                        android:fontFamily="@font/intel"
-                        android:gravity="center"
-                        android:paddingTop="2dp"
-                        android:singleLine="true"
-                        android:text="@string/forgot_password"
-                        android:textColor="@color/theme_color"
-                        android:textSize="16sp" />
 
                     <TextView
+                        android:layout_marginTop="32dp"
+                        android:id="@+id/btn_privacyPolicy"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginTop="6dp"
                         android:fontFamily="@font/intel"
-                        android:gravity="center"
+                        android:gravity="center|bottom"
                         android:paddingTop="2dp"
                         android:singleLine="true"
-                        android:text="@string/or"
+                        android:text="@string/privacyPolicy"
                         android:textColor="@color/theme_color"
-                        android:textSize="16sp" />-->
+                        android:textSize="16dp"/>
+
+                    <View
+                        android:layout_width="100dp"
+                        android:layout_gravity="center"
+                        android:foregroundGravity="center"
+                        android:layout_height="1dp"
+                        android:background="@color/theme_color2"/>
+                    <!--                    <TextView
+                                            android:id="@+id/txt_forgot_password"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            android:layout_marginTop="24dp"
+                                            android:fontFamily="@font/intel"
+                                            android:gravity="center"
+                                            android:paddingTop="2dp"
+                                            android:singleLine="true"
+                                            android:text="@string/forgot_password"
+                                            android:textColor="@color/theme_color"
+                                            android:textSize="16sp" />
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            android:layout_marginTop="6dp"
+                                            android:fontFamily="@font/intel"
+                                            android:gravity="center"
+                                            android:paddingTop="2dp"
+                                            android:singleLine="true"
+                                            android:text="@string/or"
+                                            android:textColor="@color/theme_color"
+                                            android:textSize="16sp" />-->
 
                     <TextView
                         android:layout_width="match_parent"
