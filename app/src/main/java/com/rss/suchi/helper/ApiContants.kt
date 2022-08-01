@@ -4,6 +4,7 @@ object ApiContants {
 
 //        const val PREF_base_url = "http://cbisolar.in/cbipanel/Api/Api/"
         const val PREF_base_url = "http://ec2-18-233-135-9.compute-1.amazonaws.com:8000/api/v1/"
+//        const val PREF_base_url = "http://ec2-18-233-135-9.compute-1.amazonaws.com:9000/api/v1/"
 
         const val PREF_customer_login = "getuserDetails"
         const val PREF_regis = "userRegistration"
@@ -21,7 +22,7 @@ object ApiContants {
         const val PREF_banner_list = "banner_list"
         const val PREF_ser_req_status = "ser_req_status"
         const val PREF_winner_list = "winner_list"
-        const val PREF_privacypolicy = "https://rss.com/privacy-policy/"
+        const val PREF_privacypolicy = "https://www.rss.org/"
 
         const val PREF_UserAPI = "userAPI"
         const val PREF_ClinicAPI = "clinicAPI"

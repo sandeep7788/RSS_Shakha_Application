@@ -452,14 +452,14 @@ class ServicesForm : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                     Utility.showSnackBar(this, "कृपया वर्तमान देयताएं दर्ज करें")
                     binding.layoutCurrentLiabilities.setBackgroundResource(R.drawable.edit_txt_error)
                 }
-                binding.edtPresent.text.isEmpty() -> {
-                    Utility.showSnackBar(this, "कृपया कानूनीसंगठन वर्तमान समय दर्ज करें")
-                    binding.layoutPresent.setBackgroundResource(R.drawable.edit_txt_error)
-                }
-                binding.edtEast.text.isEmpty() -> {
-                    Utility.showSnackBar(this, "कृपया कानूनी संगठन पूर्व समय दर्ज करें")
-                    binding.layoutEast.setBackgroundResource(R.drawable.edit_txt_error)
-                }
+//                binding.edtPresent.text.isEmpty() -> {
+//                    Utility.showSnackBar(this, "कृपया कानूनीसंगठन वर्तमान समय दर्ज करें")
+//                    binding.layoutPresent.setBackgroundResource(R.drawable.edit_txt_error)
+//                }
+//                binding.edtEast.text.isEmpty() -> {
+//                    Utility.showSnackBar(this, "कृपया कानूनी संगठन पूर्व समय दर्ज करें")
+//                    binding.layoutEast.setBackgroundResource(R.drawable.edit_txt_error)
+//                }
 
                 else -> {
                     if (isFormUpdate) {

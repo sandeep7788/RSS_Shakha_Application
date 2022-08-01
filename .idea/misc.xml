@@ -28,6 +28,7 @@
         <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/adapter_all_shaka_layout.xml" value="0.29243266353142366" />
+        <entry key="app/src/main/res/layout/adapter_dashboard_layout.xml" value="0.29243266353142366" />
         <entry key="app/src/main/res/layout/adapter_dashboard_menu.xml" value="0.29243266353142366" />
         <entry key="app/src/main/res/layout/adapter_shaka_layout.xml" value="0.35520833333333335" />
         <entry key="app/src/main/res/layout/layout_navigation.xml" value="0.30462962962962964" />

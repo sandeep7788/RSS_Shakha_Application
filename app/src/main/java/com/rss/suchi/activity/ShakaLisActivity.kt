@@ -1,10 +1,8 @@
 package com.rss.suchi.activity
 
-import android.Manifest
 import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -13,8 +11,6 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import cn.pedant.SweetAlert.SweetAlertDialog
@@ -22,7 +18,6 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.bumptech.glide.request.RequestOptions
 import com.cbi_solar.helper.ApiContants
-import com.cbi_solar.helper.ApiContants.PREF_base_url
 import com.cbi_solar.helper.MyApplication
 import com.cbi_solar.helper.Utility
 import com.google.gson.JsonObject
@@ -69,7 +64,6 @@ class ShakaLisActivity : AppCompatActivity() {
     }
 
 
-
     private fun downloadFile() {
         val mProgressDialog: ProgressDialog = ProgressDialog(this@ShakaLisActivity)
         mProgressDialog.setMessage("A message")
@@ -87,7 +81,7 @@ class ShakaLisActivity : AppCompatActivity() {
 
     private fun clickListener() {
 
-        binding.toolbar.imgBack.setOnClickListener { finish() }
+        binding.toolbar.imgBack.setOnClickListener { onBackPressed() }
         binding.toolbar.imgDownload.setOnClickListener {
             downloadFile()
         }
@@ -149,10 +143,19 @@ class ShakaLisActivity : AppCompatActivity() {
         progressDialog!!.show()
         allShakhaList.clear()
 
+        if (intent.extras == null) {
+            return
+        }
         val apiService: ApiInterface =
             RestClient().getClient(context)!!.create(ApiInterface::class.java)
         val call: Call<JsonObject> =
-            apiService.dashboardShakaList(2)
+            apiService.dashboardShakaList(
+                2,
+                MyApplication.ReadIntPreferences(ApiContants.PREF_USER_ID),
+                intent.getStringExtra("flagType"),
+                intent.getIntExtra("flag_id", 0).toInt()
+            )
+
         call.enqueue(object : Callback<JsonObject?> {
             override fun onResponse(
                 call: Call<JsonObject?>,
@@ -283,5 +286,16 @@ class ShakaLisActivity : AppCompatActivity() {
         if (resultCode == RESULT_OK) {
             getDashboardList()
         }
+    }
+    var IS_FROM_ADVANCE_DASHBOARD = 1111
+    override fun onBackPressed() {
+        if (!MyApplication.readBoolPreferences(ApiContants.isMskUser)) {
+            val intent = intent
+//            intent.putExtra(IS_FROM_ADVANCE_DASHBOARD , true)
+            setResult(RESULT_OK, intent)
+            finish()
+        } else
+            super.onBackPressed()
+
     }
 }

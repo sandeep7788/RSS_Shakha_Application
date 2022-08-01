@@ -2,6 +2,7 @@ package com.rss.suchi.helper;
 
 import com.cbi_solar.helper.ApiContants;
 import com.google.gson.JsonObject;
+import com.rss.suchi.model.DashBoardMainModel;
 import com.rss.suchi.model.ShakaUserListModel;
 import com.rss.suchi.model.ViewRegistrationUserModel;
 
@@ -40,10 +41,19 @@ public interface ApiInterface {
     Call<JsonObject> deletess(@Query("ss_id") Integer ss_id);
 
     @GET(ApiContants.PREF_dashboard)
-    Call<JsonObject> dashboard(@Query("id") Integer id);
+    Call<JsonObject> dashboard(@Query("id") Integer id, @Query("user_id") Integer user_id, @Query("flag") String flag
+            , @Query("flag_id") Integer flag_id);
+
+    @GET(ApiContants.PREF_dashboard)
+    Call<DashBoardMainModel> dashboardList(@Query("id") Integer id, @Query("user_id") Integer user_id, @Query("flag") String flag
+            , @Query("flag_id") Integer flag_id);
 
     @GET(ApiContants.PREF_dashboard)
     Call<JsonObject> dashboardShakaList(@Query("id") Integer id);
+//
+    @GET(ApiContants.PREF_dashboard)
+    Call<JsonObject> dashboardShakaList(@Query("id") Integer id, @Query("user_id") Integer user_id, @Query("flag") String flag
+            , @Query("flag_id") Integer flag_id);
 
     @GET(ApiContants.PREF_getExcel)
     Call<ResponseBody> getExcel(@Query("shakha_id") Integer shakha_id);

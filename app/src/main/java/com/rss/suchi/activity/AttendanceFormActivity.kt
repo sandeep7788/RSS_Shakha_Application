@@ -69,7 +69,8 @@ class AttendanceFormActivity : AppCompatActivity() {
 
         binding.btnSubmit.setOnClickListener {
             binding.layoutDate.setBackgroundResource(R.drawable.edit_txtbg)
-            binding.layoutNumber.setBackgroundResource(R.drawable.edit_txtbg)
+            binding.layoutTaruName.setBackgroundResource(R.drawable.edit_txtbg)
+            binding.layoutBaalName.setBackgroundResource(R.drawable.edit_txtbg)
             binding.edtTravelName.setBackgroundResource(R.drawable.edit_txtbg)
 
             when {
@@ -77,9 +78,13 @@ class AttendanceFormActivity : AppCompatActivity() {
                     Utility.showSnackBar(this, "कृपया तिथि चुनें")
                     binding.layoutDate.setBackgroundResource(R.drawable.edit_txt_error)
                 }
-                binding.edtNumber.text.isEmpty() -> {
-                    Utility.showSnackBar(this, "कृपया सांख्य दर्ज करें")
-                    binding.layoutNumber.setBackgroundResource(R.drawable.edit_txt_error)
+                binding.edtTarunName.text.isEmpty() -> {
+                    Utility.showSnackBar(this, "कृपया तरूण सांख्य दर्ज करें")
+                    binding.layoutTaruName.setBackgroundResource(R.drawable.edit_txt_error)
+                }
+                binding.edtBaalName.text.isEmpty() -> {
+                    Utility.showSnackBar(this, "कृपया बाल सांख्य दर्ज करें")
+                    binding.layoutBaalName.setBackgroundResource(R.drawable.edit_txt_error)
                 }
                 binding.edtTravelName.text.isEmpty() && binding.radioTravelYes.isChecked -> {
                     Utility.showSnackBar(this, "कृपया प्रवासी दर्ज करें")
@@ -139,11 +144,12 @@ class AttendanceFormActivity : AppCompatActivity() {
 
         var request = JSONObject()
         request.put("date",binding.txtDate.text.toString().trim())
-        request.put("shakha",binding.edtNumber.text.toString().trim())
+        request.put("sankhya_tarun",binding.edtTarunName.text.toString().trim())
+        request.put("sankhya_bal",binding.edtBaalName.text.toString().trim())
         request.put("pravas",radioTravel)
         request.put("pravashi_name",binding.edtTravelName.text.toString().trim())
-        request.put("sankhya",MyApplication.ReadIntPreferences(ApiContants.PREF_USER_SHAKA))
-        request.put("flag","u")
+        request.put("shakha",MyApplication.ReadIntPreferences(ApiContants.PREF_USER_SHAKA))
+        request.put("flag",1)
 
         val apiService: ApiInterface =
             RestClient().getClient(context)!!.create(ApiInterface::class.java)

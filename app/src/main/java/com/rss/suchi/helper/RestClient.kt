@@ -17,7 +17,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import java.util.concurrent.TimeUnit
 
-public class RestClient {
+class RestClient {
     var retrofit: Retrofit? = null
     var connectionTimeout: Long = 0
     var readTimeout: Long = 0
@@ -51,7 +51,37 @@ public class RestClient {
     }
 
 
-    public fun getClient(context: Activity): Retrofit? {
+    fun getClient(context: Activity): Retrofit? {
+
+        if (!isNetworkAvailable(context)) {
+            showDialog(context)
+        }
+        var BASE_URL_1: String = PREF_base_url
+        Log.e("::Retrofit:::", "getClient: $BASE_URL_1")
+        if (retrofit == null) {
+            Log.e("::Retrofit:::", "getClient11: $BASE_URL_1")
+            val builder = OkHttpClient.Builder()
+            val httpLoggingInterceptor = HttpLoggingInterceptor()
+            httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+            builder.connectTimeout(connectionTimeout, TimeUnit.SECONDS)
+                .readTimeout(readTimeout, TimeUnit.MINUTES)
+                .writeTimeout(writeTimeout, TimeUnit.MINUTES)
+                .retryOnConnectionFailure(shouldRetryOnConnectionFailure)
+//                .addInterceptor(ChuckInterceptor(AppInitialization.getInstance()))
+                .addInterceptor(httpLoggingInterceptor)
+            val gson = GsonBuilder().setLenient().create()
+            val okHttpClient = builder.build()
+            retrofit = Retrofit.Builder()
+                .client(okHttpClient)
+                .baseUrl(BASE_URL_1)
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build()
+        }
+        return retrofit
+    }
+
+    fun getClient2(context: Activity): Retrofit? {
 
         if (!isNetworkAvailable(context)) {
             showDialog(context)

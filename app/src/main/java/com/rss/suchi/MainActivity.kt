@@ -12,6 +12,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import android.view.Gravity
+import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -20,6 +21,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.recyclerview.widget.LinearLayoutManager
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.cbi_solar.helper.ApiContants
 import com.cbi_solar.helper.MyApplication
@@ -27,19 +29,26 @@ import com.cbi_solar.helper.Utility
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.gson.JsonObject
 import com.rss.suchi.activity.*
+import com.rss.suchi.adapter.DashboardAdapter
 import com.rss.suchi.databinding.ActivityMainBinding
 import com.rss.suchi.helper.ApiInterface
 import com.rss.suchi.helper.RestClient
+import com.rss.suchi.helper.VerticalSpacingItemDecorator
+import com.rss.suchi.model.DashBoardMainModel
+import com.rss.suchi.model.DashboardNewListModel
+import com.rss.suchi.model.DataForManageBackPress
 import com.rss.suchi.model.ShakaUserListModel
 import org.json.JSONObject
 import org.jsoup.Jsoup
+import org.jsoup.nodes.Document
+import org.jsoup.select.Elements
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.io.IOException
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), DashboardAdapter.MyAdapterListener {
 
     private lateinit var context: Activity
     private var TAG = "@@MainActivity"
@@ -47,6 +56,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private var exit = false
     private var REQUEST_CODE = 101
+    private var CALL_OTHER_API_CODE = 102
+    private var adapter: DashboardAdapter? = null
 
     @SuppressLint("WrongConstant")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,13 +76,13 @@ class MainActivity : AppCompatActivity() {
         setData()
         clickListener()
         checkAccess()
-        checkForUpdate()
+        initShakaListRecyclerView()
     }
 
     private fun checkForUpdate() {
         try {
             GetLatestVersion(this@MainActivity).execute()
-        }catch (e:Exception) {
+        } catch (e: Exception) {
 
         }
     }
@@ -89,14 +100,40 @@ class MainActivity : AppCompatActivity() {
 //            "" + MyApplication.ReadStringPreferences(ApiContants.PREF_USER_NAME)
         binding.txtName.text = "" + MyApplication.ReadStringPreferences(ApiContants.PREF_USER_NAME)
         binding.isMskUser = MyApplication.readBoolPreferences(ApiContants.isMskUser)
-        binding.includeNavigation.isMskUser =
-            MyApplication.readBoolPreferences(ApiContants.isMskUser)
+        binding.includeNavigation.isMskUser = MyApplication.readBoolPreferences(ApiContants.isMskUser)
 
+//        if (MyApplication.readBoolPreferences(ApiContants.isMskUser)) {
+//            getFormListSize(MyApplication.ReadIntPreferences(ApiContants.PREF_USER_SHAKA)!!)
+//        } else getDashboardData()
+
+        listForManage.clear()
+        listForManage.add(DataForManageBackPress(1, "S"))
 
         if (MyApplication.readBoolPreferences(ApiContants.isMskUser)) {
+            showRecyclerView(false)
             getFormListSize(MyApplication.ReadIntPreferences(ApiContants.PREF_USER_SHAKA)!!)
-        } else getDashboardData()
+        } else {
+            showRecyclerView(true)
+            getDashboardListData(1, "S")
+        }
+    }
 
+    private fun showRecyclerView(status:Boolean) {
+        if (status) {
+            binding.recyclerView.visibility = View.VISIBLE
+            binding.scrollView.visibility = View.GONE
+        } else {
+            binding.recyclerView.visibility = View.GONE
+            binding.scrollView.visibility = View.VISIBLE
+        }
+    }
+
+    private fun initShakaListRecyclerView() {
+        binding.recyclerView.layoutManager = LinearLayoutManager(this)
+        val itemDecorator = VerticalSpacingItemDecorator(20)
+        binding.recyclerView.addItemDecoration(itemDecorator)
+        adapter = DashboardAdapter(this@MainActivity, this)
+        binding.recyclerView.adapter = adapter
     }
 
     @SuppressLint("WrongConstant")
@@ -199,7 +236,15 @@ class MainActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         closeDrawerBar()
-        if (exit) {
+        listForManage.removeAt(listForManage.lastIndex)
+        if (listForManage.isNotEmpty()) {
+            showRecyclerView(true)
+            getDashboardListData(
+                listForManage.get(listForManage.lastIndex).flag_id,
+                listForManage.get(listForManage.lastIndex).flag_type
+            )
+            return
+        } else if (exit) {
             finish() // finish activity
         } else {
             Toast.makeText(
@@ -213,13 +258,13 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun getDashboardData() {
+    private fun getDashboardData(flag_id: Int, flagType: String,) {
         progressDialog!!.show()
 
         val apiService: ApiInterface =
             RestClient().getClient(context)!!.create(ApiInterface::class.java)
         val call: Call<JsonObject> =
-            apiService.dashboard(1)
+            apiService.dashboard(2,MyApplication.ReadIntPreferences(ApiContants.PREF_USER_ID),flagType,flag_id)
         call.enqueue(object : Callback<JsonObject?> {
             override fun onResponse(
                 call: Call<JsonObject?>,
@@ -234,10 +279,16 @@ class MainActivity : AppCompatActivity() {
                             JSONObject(response.body().toString()).getJSONObject("data")
 
                         if (jsonObject.has("total_shaka")) {
-                            var totalSevak = jsonObject.getInt("toatl_swayam_sevak").toString()
+                /*            var totalSevak = jsonObject.getInt("toatl_swayam_sevak").toString()
                             binding.txtTotalShaka.text = jsonObject.getInt("total_shaka").toString()
                             binding.txtTotalSwayamSevak.text = totalSevak
-                            binding.txtPresent.text = jsonObject.getInt("present").toString()
+                            binding.txtPresent.text = jsonObject.getInt("present").toString()*/
+
+
+                            var totalSevak = jsonObject.getInt("total").toString()
+                            binding.txtTotalShaka.text = jsonObject.getString("shakha_name").toString()
+                            binding.txtTotalSwayamSevak.text = totalSevak
+//                            binding.txtPresent.text = jsonObject.getInt("present").toString()
                         } else showErrorDialog()
 
                     } else {
@@ -319,7 +370,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun getFormListSize(id: Int) {
         progressDialog!!.show()
-        binding.txtTotalSwayamSevakTwo.setText("0")
+        binding.txtTotalSwayamSevakTwo.text = "0"
         val apiService: ApiInterface =
             RestClient().getClient(context)!!.create(ApiInterface::class.java)
         val call: Call<ShakaUserListModel> =
@@ -372,7 +423,11 @@ class MainActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == RESULT_OK) {
+
+        if (resultCode == IS_FROM_ADVANCE_DASHBOARD) {
+            showRecyclerView(true)
+            setData()
+        }else if (resultCode == RESULT_OK) {
             setData()
         }
     }
@@ -385,7 +440,7 @@ class MainActivity : AppCompatActivity() {
         override fun onPostExecute(s: String) {
             // Get current version
 
-            sCurrentVersion = BuildConfig.VERSION_NAME
+            sCurrentVersion = "4.0"
             if (sLatestVersion != null) {
                 // Version convert to float
                 val cVersion: Float = sCurrentVersion!!.toFloat()
@@ -402,20 +457,23 @@ class MainActivity : AppCompatActivity() {
 
         override fun doInBackground(vararg p0: String?): String {
             try {
-                sLatestVersion = Jsoup
-                    .connect(
-                        "https://play.google.com//store/apps/details?id="
-                                + act.packageName
-                    )
-                    .timeout(30000)
-                    .get()
-                    .select(
-                        ("div.hAyfc:nth-child(4)>" +
-                                "span:nth-child(2) > div:nth-child(1)" +
-                                "> span:nth-child(1)")
-                    )
-                    .first()
-                    .ownText()
+                val document: Document? =
+                    Jsoup.connect("https://play.google.com/store/apps/details?id=com.rss.suchi")
+                        .timeout(20000)
+                        .userAgent("Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6")
+                        .referrer("http://www.google.com")
+                        .get()
+                if (document != null) {
+                    val element: Elements = document.getElementsContainingOwnText("Current Version")
+                    for (ele in element) {
+                        if (ele.siblingElements() != null) {
+                            val sibElemets = ele.siblingElements()
+                            for (sibElemet in sibElemets) {
+                                sLatestVersion = sibElemet.text()
+                            }
+                        }
+                    }
+                }
             } catch (e: IOException) {
                 e.printStackTrace()
             }
@@ -456,5 +514,91 @@ class MainActivity : AppCompatActivity() {
 
         // show alert dialog
         builder.show()
+    }
+
+    private var list: ArrayList<DashboardNewListModel> = ArrayList()
+    private var listForManage: ArrayList<DataForManageBackPress> = ArrayList()
+
+    private fun getDashboardListData(flag_id: Int, flagType: String) {
+        progressDialog!!.show()
+
+        var apiId = if (listForManage.size <= 1) 1 else 2
+
+        val apiService: ApiInterface =
+            RestClient().getClient2(context)!!.create(ApiInterface::class.java)
+        val call: Call<DashBoardMainModel> =
+            apiService.dashboardList(apiId, MyApplication.ReadIntPreferences(ApiContants.PREF_USER_ID), flagType, flag_id.toInt())
+        call.enqueue(object : Callback<DashBoardMainModel?> {
+            override fun onResponse(
+                call: Call<DashBoardMainModel?>,
+                response: Response<DashBoardMainModel?>
+            ) {
+                Log.e(TAG, "onResponse:1 " + response.body().toString())
+                try {
+                    list.clear()
+                    if (response.isSuccessful && response.body() != null) if (response.isSuccessful && response.body() != null && response.body()?.data != null) {
+
+                        for (i in 0 until response.body()?.data?.size!!) {
+                            response.body()?.data?.get(i)?.let { list.add(it) }!!
+                        }
+                        if (response.body() == null) {
+                            adapter!!.setData(ArrayList<DashboardNewListModel>())
+                            Utility.showDialog(
+                                context,
+                                SweetAlertDialog.WARNING_TYPE,
+                                "सूची खाली है"
+                            )
+                        } else {
+                            adapter!!.setData(list)
+                        }
+                    } else {
+                        showErrorDialog()
+                    }
+
+                } catch (e: Exception) {
+                    Log.d(TAG, "onResponse: " + e.message.toString())
+                    showErrorDialog()
+
+                    Toast.makeText(
+                        context,
+                        " " + resources.getString(R.string.error),
+                        Toast.LENGTH_LONG
+                    )
+                        .show()
+                }
+                progressDialog!!.dismiss()
+            }
+
+            override fun onFailure(call: Call<DashBoardMainModel?>, t: Throwable) {
+                if (Utility.isNetworkAvailable(context)) {
+                    Toast.makeText(
+                        context,
+                        " " + resources.getString(R.string.error),
+                        Toast.LENGTH_LONG
+                    )
+                        .show()
+                    showErrorDialog()
+                }
+                progressDialog!!.dismiss()
+            }
+        })
+    }
+
+
+    var IS_FROM_ADVANCE_DASHBOARD = 1111
+    override fun onContainerClick(flag_id: Int, flagType: String, isChangeApi:Boolean) {
+        if (isChangeApi) {
+//            showRecyclerView(false)
+//            getFormListSize(MyApplication.ReadIntPreferences(ApiContants.PREF_USER_SHAKA)!!)
+//            getDashboardData(flag_id, flagType)
+            var intent = Intent(this@MainActivity, ShakaLisActivity::class.java)
+            intent.putExtra("flag_id",flag_id.toInt())
+            intent.putExtra("flagType",flagType)
+            startActivityForResult(intent,IS_FROM_ADVANCE_DASHBOARD)
+
+        } else {
+            listForManage.add(DataForManageBackPress(flag_id, flagType))
+            getDashboardListData(flag_id, flagType)
+        }
     }
 }
