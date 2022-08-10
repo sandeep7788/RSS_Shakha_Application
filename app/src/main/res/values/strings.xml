@@ -29,7 +29,7 @@
     <string name="yes">हां</string>
     <string name="no">नहीं</string>
     <string name="ghoshi">घोष</string>
-    <string name="legalOrganization">विधिक संगठन</string>
+    <string name="legalOrganization">विविध संगठन</string>
     <string name="present">वर्तमान</string>
     <string name="east">पूर्व</string>
     <string name="submit">फार्म जमा करें</string>
@@ -38,7 +38,7 @@
     <string name="changePassword">पासवर्ड बदलें</string>
     <string name="privacyPolicy">गोपनीयता नीति</string>
     <string name="signOut">साइन आउट</string>
-    <string name="appVersion">ऐप संस्करण: 1.1.0</string>
+    <string name="appVersion">ऐप संस्करण: 6.1</string>
     <string name="date">दिनांक</string>
     <string name="number">सांख्य</string>
     <string name="travel">प्रवास</string>

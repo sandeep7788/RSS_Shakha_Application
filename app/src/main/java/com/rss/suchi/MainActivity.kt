@@ -232,6 +232,10 @@ class MainActivity : AppCompatActivity(), DashboardAdapter.MyAdapterListener {
         binding.layoutTotalShaka.setOnClickListener {
             startActivity(Intent(this@MainActivity, ShakaLisActivity::class.java))
         }
+
+        binding.includeNavigation.layoutContactUs.setOnClickListener {
+            startActivity(Intent(this@MainActivity, ContactUsActivity::class.java))
+        }
     }
 
     override fun onBackPressed() {

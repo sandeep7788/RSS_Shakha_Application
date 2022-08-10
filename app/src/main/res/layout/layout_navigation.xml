@@ -302,6 +302,40 @@
 
                     </LinearLayout>
 
+                    <LinearLayout
+                        android:id="@+id/layout_contact_us"
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:layout_marginTop="0.4dp"
+                        android:background="@drawable/ripple"
+                        android:foreground="?attr/selectableItemBackground"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="29dp"
+                            android:padding="1dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/ic_baseline_contact_phone_24"
+                            tools:ignore="VectorDrawableCompat"
+                            black:tint="@color/nev_icon_color" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="33dp"
+                            android:drawableTint="@color/black"
+                            android:fontFamily="@font/intel"
+                            android:text="संपर्क करें"
+                            android:textColor="@color/nev_textcolor"
+                            android:textSize="@dimen/text_nev"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
 
                     <LinearLayout
                         android:id="@+id/layout_SignOut"

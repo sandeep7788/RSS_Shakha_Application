@@ -106,7 +106,14 @@ class SignInActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                         Log.d(TAG, "onResponse: " + response.body().toString())
                         val jsonObject =
                             JSONObject(response.body().toString()).getJSONObject("data")
+                        try {
+                            MyApplication.writeStringPreference(
+                                ApiContants.PREF_STATUS,
+                                JSONObject(response.body().toString()).getInt("status").toString()
+                            )
+                        }catch (e:Exception) {
 
+                        }
                         if (jsonObject.has("response")) {
                             msg = jsonObject.getString("response")
                             Toast.makeText(
@@ -134,6 +141,8 @@ class SignInActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                             )
                             MyApplication.writeStringPreference(ApiContants.login, "true")
                             MyApplication.writeBoolPreference(ApiContants.isMskUser, data.getInt("shaka") > 0)
+
+
 
                             startActivity(Intent(context, MainActivity::class.java))
                             finish()

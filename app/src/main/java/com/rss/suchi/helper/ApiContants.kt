@@ -40,6 +40,7 @@ object ApiContants {
         const val PREF_WhatsAppNumber = "PREF_L_name"
         const val PREF_USER_ID = "USER_ID"
         const val PREF_USER_SHAKA = "USER_SHAKA"
+        const val PREF_STATUS = "PREF_STATUS"
 
         const val PREF_city = "city"
         const val PREF_pin = "pin"
