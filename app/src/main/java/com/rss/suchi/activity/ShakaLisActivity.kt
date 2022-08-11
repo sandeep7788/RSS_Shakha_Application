@@ -66,10 +66,10 @@ class ShakaLisActivity : AppCompatActivity() {
 
     private fun downloadFile() {
         val mProgressDialog: ProgressDialog = ProgressDialog(this@ShakaLisActivity)
-        mProgressDialog.setMessage("A message")
+        mProgressDialog.setMessage("कृपया प्रतीक्षा करें")
         mProgressDialog.isIndeterminate = true
         mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL)
-        mProgressDialog.setCancelable(true)
+        mProgressDialog.setCancelable(false)
 
         val downloadTask = DownloadTask(this@ShakaLisActivity, mProgressDialog)
         downloadTask.execute("${ApiContants.PREF_getExcel}?shakha_id=0")
