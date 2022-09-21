@@ -17,6 +17,11 @@
         android:elevation="4dp">
 
         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        <LinearLayout
             android:id="@+id/layoutShakha"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -30,13 +35,15 @@
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="4dp"
-                android:layout_marginBottom="12dp"
+                android:layout_marginBottom="4dp"
                 android:layout_weight="1"
                 android:fontFamily="@font/intel"
+                android:textStyle="bold"
+                android:text="@string/presence"
                 android:foregroundGravity="center|left"
                 android:gravity="center|left|left"
                 android:textColor="@color/gpvch_black"
-                android:textSize="@dimen/txt_20sp" />
+                android:textSize="18dp" />
 
             <TextView
                 android:id="@+id/txtTotalShaka"
@@ -46,18 +53,65 @@
                 android:layout_marginStart="4dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="12dp"
-                android:layout_marginBottom="12dp"
+                android:layout_marginBottom="4dp"
                 android:layout_weight="2"
                 android:fontFamily="@font/intel"
                 android:foregroundGravity="center|left"
                 android:gravity="center"
                 android:lines="1"
+                android:text="00"
                 android:textColor="@color/gpvch_black"
-                android:textSize="@dimen/txt_25sp"
+                android:textSize="20dp"
                 android:textStyle="bold" />
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="3"
+            android:layout_marginBottom="4dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|left|left"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginBottom="4dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/intel"
+                android:textStyle="bold"
+                android:text="@string/presence"
+                android:foregroundGravity="center|left"
+                android:gravity="center|left|left"
+                android:textColor="@color/gpvch_black"
+                android:textSize="18dp" />
+
+            <TextView
+                android:id="@+id/txtPresent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|left|left"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="4dp"
+                android:layout_weight="2"
+                android:fontFamily="@font/intel"
+                android:foregroundGravity="center|left"
+                android:gravity="center"
+                android:lines="1"
+                android:text="00"
+                android:textColor="@color/gpvch_black"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+
+        </LinearLayout>
 
     </androidx.cardview.widget.CardView>
 </layout>

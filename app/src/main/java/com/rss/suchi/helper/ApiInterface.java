@@ -2,8 +2,11 @@ package com.rss.suchi.helper;
 
 import com.cbi_solar.helper.ApiContants;
 import com.google.gson.JsonObject;
+import com.rss.suchi.adapter.ShakaUserSearchAdapter;
 import com.rss.suchi.model.DashBoardMainModel;
 import com.rss.suchi.model.ShakaUserListModel;
+import com.rss.suchi.model.ShakaUserListSearchModel;
+import com.rss.suchi.model.ShakaUserSearch;
 import com.rss.suchi.model.ViewRegistrationUserModel;
 
 import okhttp3.ResponseBody;
@@ -33,6 +36,9 @@ public interface ApiInterface {
 
     @GET(ApiContants.PREF_viewshakhauser)
     Call<ShakaUserListModel> viewshakhauser(@Query("shakha_id") Integer shakha_id);
+
+    @GET(ApiContants.PREF_searchSS)
+    Call<ShakaUserListSearchModel> viewshakhauserBySearch(@Query("name") String name);
 
     @GET(ApiContants.PREF_viewuser)
     Call<ViewRegistrationUserModel> viewuser(@Query("ss_id") Integer ss_id);

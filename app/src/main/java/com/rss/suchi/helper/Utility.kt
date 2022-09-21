@@ -32,6 +32,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.startActivity
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
@@ -39,6 +40,7 @@ import com.rss.suchi.R
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 class Utility {
     companion object {
@@ -322,6 +324,24 @@ class Utility {
                 val intent = Intent(Intent.ACTION_VIEW)
                 intent.data = Uri.parse(uri)
                 context.startActivity(intent)
+            } catch (e: java.lang.Exception) {
+                Toast.makeText(context,
+                    "WhatsApp cannot be opened", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        fun openWhatsApp(context: Context,number: String) {
+            try {
+                val whatsAppRoot = "http://api.whatsapp.com/"
+                val number = "send?phone=" + "+91"+number.trim() //here the mobile number with its international prefix
+                val text = "&text=भाई साहब राम-राम \uD83D\uDEA9 \uD83D\uDEA9,\n"
+
+                val uri = whatsAppRoot + number + text
+                val intent = Intent(Intent.ACTION_VIEW)
+                intent.data = Uri.parse(uri)
+                context.startActivity(intent)
+
+
             } catch (e: java.lang.Exception) {
                 Toast.makeText(context,
                     "WhatsApp cannot be opened", Toast.LENGTH_SHORT).show()

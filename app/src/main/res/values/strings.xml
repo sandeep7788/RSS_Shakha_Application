@@ -37,6 +37,7 @@
     <string name="registrationForm">पंजीकरण फार्म</string>
     <string name="changePassword">पासवर्ड बदलें</string>
     <string name="privacyPolicy">गोपनीयता नीति</string>
+    <string name="nav_search">खोज</string>
     <string name="signOut">साइन आउट</string>
     <string name="appVersion">ऐप संस्करण: 10.1</string>
     <string name="date">दिनांक</string>

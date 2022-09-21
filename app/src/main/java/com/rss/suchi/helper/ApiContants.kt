@@ -3,12 +3,13 @@ package com.cbi_solar.helper
 object ApiContants {
 
 //        const val PREF_base_url = "http://cbisolar.in/cbipanel/Api/Api/"
-        const val PREF_base_url = "http://ec2-18-233-135-9.compute-1.amazonaws.com:8000/api/v1/"
-//        const val PREF_base_url = "http://ec2-18-233-135-9.compute-1.amazonaws.com:9000/api/v1/"
+//        const val PREF_base_url = "http://ec2-18-233-135-9.compute-1.amazonaws.com:8000/api/v1/"
+        const val PREF_base_url = "http://ec2-18-233-135-9.compute-1.amazonaws.com:9000/api/v1/"
 
         const val PREF_customer_login = "getuserDetails"
         const val PREF_regis = "userRegistration"
         const val PREF_viewshakhauser = "viewshakhauser"
+        const val PREF_searchSS = "searchSS"
         const val PREF_viewuser = "viewuser"
         const val PREF_deletess = "deletess"
         const val PREF_dashboard = "dashboard"
@@ -80,6 +81,6 @@ object ApiContants {
         const val PREF_CountryCode = "PREF_CountryCode"
         const val PREF_StateId = "PREF_StateId"
         const val PREF_Zip = "PREF_Zip"
-        const val PREF_GST_no = "PREF_GST_no"
+        const val isDisable = "isDisable"
 
 }

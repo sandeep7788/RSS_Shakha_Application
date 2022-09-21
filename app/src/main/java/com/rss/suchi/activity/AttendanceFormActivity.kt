@@ -143,7 +143,7 @@ class AttendanceFormActivity : AppCompatActivity() {
         val radioTravel = if (binding.radioTravelYes.isChecked) 1 else 0
 
         var request = JSONObject()
-        request.put("date",binding.txtDate.text.toString().trim())
+        request.put("date",binding.txtDate.text.toString())
         request.put("sankhya_tarun",binding.edtTarunName.text.toString().trim())
         request.put("sankhya_bal",binding.edtBaalName.text.toString().trim())
         request.put("pravas",radioTravel)

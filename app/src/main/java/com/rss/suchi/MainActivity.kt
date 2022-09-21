@@ -73,6 +73,8 @@ class MainActivity : AppCompatActivity(), DashboardAdapter.MyAdapterListener {
         progressDialog!!.titleText = "Loading ..."
         progressDialog!!.setCancelable(false)
 
+
+
         setData()
         clickListener()
         checkAccess()
@@ -115,6 +117,10 @@ class MainActivity : AppCompatActivity(), DashboardAdapter.MyAdapterListener {
         } else {
             showRecyclerView(true)
             getDashboardListData(1, "S")
+        }
+
+        if (MyApplication.ReadIntPreferences(ApiContants.PREF_USER_SHAKA) == 0) {
+            binding.includeNavigation.layoutSearch.visibility = View.VISIBLE
         }
     }
 
@@ -235,6 +241,10 @@ class MainActivity : AppCompatActivity(), DashboardAdapter.MyAdapterListener {
 
         binding.includeNavigation.layoutContactUs.setOnClickListener {
             startActivity(Intent(this@MainActivity, ContactUsActivity::class.java))
+        }
+
+        binding.includeNavigation.layoutSearch.setOnClickListener {
+            startActivity(Intent(this@MainActivity, ShakaUserSearchActivity::class.java))
         }
     }
 

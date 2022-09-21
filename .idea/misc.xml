@@ -8,14 +8,18 @@
         <entry key="app/src/main/res/drawable-v24/round_corner_shape_search.xml" value="0.2115" />
         <entry key="app/src/main/res/drawable-v24/serchbox_bg.xml" value="0.2115" />
         <entry key="app/src/main/res/drawable/add_icon.xml" value="0.1885" />
+        <entry key="app/src/main/res/drawable/calender_icon.xml" value="0.2115" />
         <entry key="app/src/main/res/drawable/circular_progress_bar.xml" value="0.2115" />
+        <entry key="app/src/main/res/drawable/edit_txt_error.xml" value="0.2115" />
         <entry key="app/src/main/res/drawable/ic_baseline_contact_phone_24.xml" value="0.2115" />
         <entry key="app/src/main/res/drawable/ic_baseline_lock_24.xml" value="0.1885" />
         <entry key="app/src/main/res/drawable/ic_baseline_privacy_tip_24.xml" value="0.1885" />
+        <entry key="app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.2115" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.2115" />
         <entry key="app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.2115" />
         <entry key="app/src/main/res/drawable/ic_search.xml" value="0.2115" />
         <entry key="app/src/main/res/drawable/logo.xml" value="0.1885" />
+        <entry key="app/src/main/res/drawable/ripple.xml" value="0.2115" />
         <entry key="app/src/main/res/drawable/round_corner_shape.xml" value="0.2115" />
         <entry key="app/src/main/res/drawable/round_corner_shape_border.xml" value="0.2115" />
         <entry key="app/src/main/res/drawable/signin_round_shape.xml" value="0.1885" />
@@ -24,8 +28,9 @@
         <entry key="app/src/main/res/layout/activity_contact_us.xml" value="0.29243266353142366" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_notifaction_list.xml" value="0.35625" />
-        <entry key="app/src/main/res/layout/activity_services_form.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_services_form.xml" value="0.25522388059701495" />
         <entry key="app/src/main/res/layout/activity_shaka_lis.xml" value="0.29243266353142366" />
+        <entry key="app/src/main/res/layout/activity_shaka_user_search.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_sign_in.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.35625" />
@@ -33,6 +38,7 @@
         <entry key="app/src/main/res/layout/adapter_dashboard_layout.xml" value="0.29243266353142366" />
         <entry key="app/src/main/res/layout/adapter_dashboard_menu.xml" value="0.29243266353142366" />
         <entry key="app/src/main/res/layout/adapter_shaka_layout.xml" value="0.35520833333333335" />
+        <entry key="app/src/main/res/layout/adapter_shaka_user_serach_layout.xml" value="0.29243266353142366" />
         <entry key="app/src/main/res/layout/layout_navigation.xml" value="0.30462962962962964" />
         <entry key="app/src/main/res/layout/layout_toolbar.xml" value="0.29243266353142366" />
         <entry key="app/src/main/res/layout/layout_toolbar_with_back_btn.xml" value="0.29157759726378796" />

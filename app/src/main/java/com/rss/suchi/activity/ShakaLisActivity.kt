@@ -44,7 +44,8 @@ class ShakaLisActivity : AppCompatActivity() {
     private var TAG = "@@ShakaLisActivity"
     private var progressDialog: SweetAlertDialog? = null
     private lateinit var binding: ActivityShakaLisBinding
-    val allShakhaList: ArrayList<DashBoardShakaList> = ArrayList()
+    private val allShakhaList: ArrayList<DashBoardShakaList> = ArrayList()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN)
@@ -173,7 +174,8 @@ class ShakaLisActivity : AppCompatActivity() {
                                 DashBoardShakaList(
                                     data.getLong("shakhaid"),
                                     data.getString("shakha_name"),
-                                    data.getLong("total")
+                                    data.getLong("total"),
+                                    data.getInt("present"),
                                 )
                             )
                         }

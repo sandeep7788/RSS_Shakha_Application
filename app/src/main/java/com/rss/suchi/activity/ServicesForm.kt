@@ -118,12 +118,19 @@ class ServicesForm : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             binding.toolbar.imgDelete.visibility = View.VISIBLE
             getFormDetails()
 
-            if (!MyApplication.readBoolPreferences(ApiContants.isMskUser)) {
+            if(intent.getBooleanExtra(ApiContants.isDisable, false)) {
+                binding.btnSubmit.visibility = View.GONE
+                binding.toolbar.imgDelete.visibility = View.GONE
+                disableAllView()
+            } else if (!MyApplication.readBoolPreferences(ApiContants.isMskUser)) {
                 binding.btnSubmit.visibility = View.GONE
                 binding.toolbar.imgDelete.visibility = View.GONE
                 disableAllView()
             }
         }
+
+        binding.imgWhatsApp.visibility = View.VISIBLE
+        binding.imgMobile.visibility = View.VISIBLE
 
         clickListener()
     }
@@ -177,6 +184,14 @@ class ServicesForm : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         disableEditText(binding.edtPresent)
         disableEditText(binding.edtEast)
         disableEditText(binding.edtOther)
+
+        binding.checkboxUniform.isFocusable = false
+        binding.checkboxUniform.isEnabled = false
+        binding.checkboxUniform.isCursorVisible = false
+        binding.checkboxUniform.keyListener = null
+        binding.checkboxUniform.setBackgroundColor(Color.TRANSPARENT)
+
+
 
     }
     private fun getIndex(spinner: Spinner, myString: String): Int {
@@ -238,6 +253,12 @@ class ServicesForm : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                         binding.edtPresent.setText(data.vidhikPresent)
                         binding.edtEast.setText(data.vidhikPast)
                         binding.edtOther.setText(data.other)
+
+                        try {
+                            binding.checkboxUniform.isChecked= data.uniform
+                        } catch (e:Exception) {
+
+                        }
 
                     } else {
                         Utility.showDialog(
@@ -448,10 +469,10 @@ class ServicesForm : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                     Utility.showSnackBar(this, "कृपया शिक्षण वर्ष दर्ज करें")
                     binding.layoutEducationYear.setBackgroundResource(R.drawable.edit_txt_error)
                 }
-                binding.edtCurrentLiabilities.text.isEmpty() -> {
-                    Utility.showSnackBar(this, "कृपया वर्तमान देयताएं दर्ज करें")
-                    binding.layoutCurrentLiabilities.setBackgroundResource(R.drawable.edit_txt_error)
-                }
+//                binding.edtCurrentLiabilities.text.isEmpty() -> {
+//                    Utility.showSnackBar(this, "कृपया वर्तमान देयताएं दर्ज करें")
+//                    binding.layoutCurrentLiabilities.setBackgroundResource(R.drawable.edit_txt_error)
+//                }
 //                binding.edtPresent.text.isEmpty() -> {
 //                    Utility.showSnackBar(this, "कृपया कानूनीसंगठन वर्तमान समय दर्ज करें")
 //                    binding.layoutPresent.setBackgroundResource(R.drawable.edit_txt_error)
@@ -473,6 +494,30 @@ class ServicesForm : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         binding.txtDateOfBirth.setOnClickListener { setDate(binding.txtDateOfBirth) }
         binding.toolbar.imgDelete.setOnClickListener {
             showDialogDeleteUser()
+        }
+
+        binding.imgWhatsApp.setOnClickListener {
+            if (!isValidPhoneNumber(binding.edtWhatsAppMobileNumber.text.toString())) {
+                Utility.hideKeyboard(this@ServicesForm)
+                Utility.showSnackBar(this@ServicesForm,"अमान्य whatsApp मोबाइल नंबर")
+            } else if (binding.edtWhatsAppMobileNumber.text.isNotEmpty()) {
+                Utility.openWhatsApp(
+                    this@ServicesForm,
+                    binding.edtWhatsAppMobileNumber.text.trim().toString()
+                )
+            }
+        }
+
+        binding.imgMobile.setOnClickListener {
+            if (!isValidPhoneNumber(binding.edtMobileNumber.text.toString())) {
+                Utility.hideKeyboard(this@ServicesForm)
+                Utility.showSnackBar(this@ServicesForm,"अमान्य मोबाइल नंबर")
+            } else if (binding.edtMobileNumber.text.isNotEmpty()) {
+                Utility.makeCall(
+                    this@ServicesForm,
+                    binding.edtMobileNumber.text.trim().toString()
+                )
+            }
         }
     }
     val REQUEST_CODE = 1
@@ -530,6 +575,12 @@ class ServicesForm : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         val oAuth = if (binding.radioPledgedYes.isChecked) 1 else 0
         val ghosh = if (binding.radioGhoshiYes.isChecked) 1 else 0
 
+        var educationYear = if (binding.spinnerEducation.selectedItemPosition == 0) {
+            "0"
+        } else {
+            binding.edtEducationYear.text.toString().trim()
+        }
+
         var request = JSONObject()
         request.put("name", binding.edtName.text.toString().trim())
         request.put("lastname", binding.edtLastName.text.toString().trim())
@@ -537,10 +588,10 @@ class ServicesForm : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         request.put("address", binding.edtAddress.text.toString().trim())
         request.put("mobile", binding.edtMobileNumber.text.toString().trim())
         request.put("whatsapp", binding.edtWhatsAppMobileNumber.text.toString().trim())
-        request.put("dob", binding.txtDateOfBirth.text.toString().trim())
+        request.put("dob", binding.txtDateOfBirth.text.toString())
         request.put("blood_group", binding.spinnerBloodGroup.selectedItem.toString().trim())
         request.put("shikshan", binding.spinnerEducation.selectedItem.toString().trim())
-        request.put("shikshan_year", binding.edtEducationYear.text.toString().trim())
+        request.put("shikshan_year", educationYear)
         request.put("pre_respon", binding.edtCurrentLiabilities.text.toString().trim())
         request.put("oauth", oAuth)
         request.put("ghosh", ghosh)
@@ -551,6 +602,7 @@ class ServicesForm : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         request.put("shakha", MyApplication.ReadIntPreferences(ApiContants.PREF_USER_SHAKA))
         request.put("other", binding.edtOther.text.toString())
         request.put("flag", "i")
+        request.put("uniform", binding.checkboxUniform.isChecked)
 
         val apiService: ApiInterface =
             RestClient().getClient(context)!!.create(ApiInterface::class.java)
@@ -630,6 +682,12 @@ class ServicesForm : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         val oAuth = if (binding.radioPledgedYes.isChecked) 1 else 0
         val ghosh = if (binding.radioGhoshiYes.isChecked) 1 else 0
 
+        var educationYear = if (binding.spinnerEducation.selectedItemPosition == 0) {
+            "0"
+        } else {
+            binding.edtEducationYear.text.toString().trim()
+        }
+
         var request = JSONObject()
         request.put("name", binding.edtName.text.toString().trim())
         request.put("lastname", binding.edtLastName.text.toString().trim())
@@ -640,7 +698,7 @@ class ServicesForm : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         request.put("dob", binding.txtDateOfBirth.text.toString().trim())
         request.put("blood_group", binding.spinnerBloodGroup.selectedItem.toString().trim())
         request.put("shikshan", binding.spinnerEducation.selectedItem.toString().trim())
-        request.put("shikshan_year", binding.edtEducationYear.text.toString().trim())
+        request.put("shikshan_year", educationYear)
         request.put("pre_respon", binding.edtCurrentLiabilities.text.toString().trim())
         request.put("oauth", oAuth)
         request.put("ghosh", ghosh)
@@ -652,6 +710,7 @@ class ServicesForm : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         request.put("other", binding.edtOther.text.toString())
         request.put("flag", "u")
         request.put("ss_id", ss_id)
+        request.put("uniform", binding.checkboxUniform.isChecked)
 
         val apiService: ApiInterface =
             RestClient().getClient(context)!!.create(ApiInterface::class.java)
@@ -660,6 +719,7 @@ class ServicesForm : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             override fun onResponse(call: Call<JsonObject?>, response: Response<JsonObject?>) {
                 Log.e(TAG, "onResponse:1 " + response.body().toString())
                 try {
+                    progressDialog?.dismiss()
                     if (response.isSuccessful) {
 
                         Log.d(TAG, "onResponse: " + response.body().toString())

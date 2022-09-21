@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.RequestManager
+import com.rss.suchi.R
 import com.rss.suchi.activity.ShakaUserListActivity
 import com.rss.suchi.databinding.AdapterAllShakaLayoutBinding
 import com.rss.suchi.model.DashBoardShakaList
@@ -38,6 +39,7 @@ class ShakhaListAdapter(var requestManager: RequestManager) :
         try {
             holder.binding.txtShakaName.text = mOptionList.get(position).shakha_name + " "
             holder.binding.txtTotalShaka.text = mOptionList.get(position).total.toString() + " "
+            holder.binding.txtPresent.text = mOptionList.get(position).present.toString() + " "
             holder.binding.layoutShakha.setOnClickListener {
                 val mainIntent = Intent(context, ShakaUserListActivity::class.java)
                 mainIntent.putExtra("isFormUpdate", true)
@@ -47,7 +49,6 @@ class ShakhaListAdapter(var requestManager: RequestManager) :
         } catch (e: Exception) {
 
         }
-
     }
 
     fun setData(mOptionList: ArrayList<DashBoardShakaList>) {

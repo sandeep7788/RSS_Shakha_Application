@@ -64,6 +64,17 @@ public class ViewRegistration {
     @SerializedName("ss")
     @Expose
     private Integer ss;
+    @SerializedName("uniform")
+    @Expose
+    private Boolean uniform;
+
+    public Boolean getUniform() {
+        return uniform;
+    }
+
+    public void setUniform(Boolean uniform) {
+        this.uniform = uniform;
+    }
 
     public String getName() {
         return name;

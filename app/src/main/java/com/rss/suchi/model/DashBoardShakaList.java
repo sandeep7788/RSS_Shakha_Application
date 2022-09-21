@@ -12,10 +12,23 @@ public class DashBoardShakaList {
     @Expose
     private String shakha_name;
 
-    public DashBoardShakaList(Long shakhaid, String shakha_name, Long total) {
+    public Integer getPresent() {
+        return present;
+    }
+
+    public void setPresent(Integer present) {
+        this.present = present;
+    }
+
+    @SerializedName("present")
+    @Expose
+    private Integer present;
+
+    public DashBoardShakaList(Long shakhaid, String shakha_name, Long total, Integer present) {
         this.shakhaid = shakhaid;
         this.shakha_name = shakha_name;
         this.total = total;
+        this.present = present;
     }
 
     public Long getShakhaid() {
