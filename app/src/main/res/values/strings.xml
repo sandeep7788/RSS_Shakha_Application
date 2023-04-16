@@ -45,6 +45,7 @@
     <string name="travel">प्रवास</string>
     <string name="travelName">प्रवास नाम</string>
     <string name="attendance">उपस्थिति</string>
+    <string name="nkk">नगर कार्यकारिणी</string>
     <string name="cancel">रद्द करना</string>
     <string name="retry">पुन: प्रयास करें</string>
     <string name="other">अन्य</string>
@@ -58,4 +59,12 @@
     <string name="search">सूची से खोजें</string>
     <string name="presence">उपस्थित</string>
     <string name="File_downloaded">फ़ाइल डाउनलोड की गई</string>
+
+    <string name="email">email id</string>
+    <string name="daitva">daitva</string>
+
+    <string name="youAreNotUpdatedTitle">Update Available</string>
+    <string name="youAreNotUpdatedMessage">A new version of सूची is available. Please update to version\s</string>
+    <string name="youAreNotUpdatedMessage1">\s now</string>
+<!--    <string name="update">Update</string>-->
 </resources>

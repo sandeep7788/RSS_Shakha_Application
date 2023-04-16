@@ -3,10 +3,15 @@ package com.rss.suchi.helper;
 import com.cbi_solar.helper.ApiContants;
 import com.google.gson.JsonObject;
 import com.rss.suchi.adapter.ShakaUserSearchAdapter;
+import com.rss.suchi.model.DaitvyDropDownMainListModel;
 import com.rss.suchi.model.DashBoardMainModel;
+import com.rss.suchi.model.NkkDetailsModel;
+import com.rss.suchi.model.NkkMainModel;
+import com.rss.suchi.model.NkkUserMainModel;
 import com.rss.suchi.model.ShakaUserListModel;
 import com.rss.suchi.model.ShakaUserListSearchModel;
 import com.rss.suchi.model.ShakaUserSearch;
+import com.rss.suchi.model.ShakhaDropDownMainListModel;
 import com.rss.suchi.model.ViewRegistrationUserModel;
 
 import okhttp3.ResponseBody;
@@ -31,6 +36,12 @@ public interface ApiInterface {
     @POST(ApiContants.PREF_regis)
     Call<JsonObject> formRegistration(@Body String request);
 
+    @POST(ApiContants.PREF_updateNkk)
+    Call<JsonObject> updateNkk(@Body String request);
+
+    @POST(ApiContants.PREF_AddNkk)
+    Call<JsonObject> addNkk(@Body String request);
+
     @POST(ApiContants.PREF_attandance)
     Call<JsonObject> attandance(@Body String request);
 
@@ -42,6 +53,9 @@ public interface ApiInterface {
 
     @GET(ApiContants.PREF_viewuser)
     Call<ViewRegistrationUserModel> viewuser(@Query("ss_id") Integer ss_id);
+
+    @GET(ApiContants.PREF_viewNkk)
+    Call<NkkUserMainModel> viewNkk(@Query("nager_id") Integer nager_id);
 
     @GET(ApiContants.PREF_deletess)
     Call<JsonObject> deletess(@Query("ss_id") Integer ss_id);
@@ -63,6 +77,15 @@ public interface ApiInterface {
 
     @GET(ApiContants.PREF_getExcel)
     Call<ResponseBody> getExcel(@Query("shakha_id") Integer shakha_id);
+
+    @GET(ApiContants.PREF_GET_NKK)
+    Call<NkkMainModel> getNkk(@Query("nager_id") Integer id);
+
+    @GET(ApiContants.shakhaDetails)
+    Call<ShakhaDropDownMainListModel> getShakhaList(@Query("nager_id") Integer id);
+
+    @GET(ApiContants.daitva)
+    Call<DaitvyDropDownMainListModel> getDaitvyList();
 
 //    @FormUrlEncoded
 //    @Headers("Content-Type: application/json")

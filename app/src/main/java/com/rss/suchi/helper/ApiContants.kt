@@ -8,9 +8,12 @@ object ApiContants {
 
         const val PREF_customer_login = "getuserDetails"
         const val PREF_regis = "userRegistration"
+        const val PREF_AddNkk = "AddNkk"
+        const val PREF_updateNkk = "updateNkk"
         const val PREF_viewshakhauser = "viewshakhauser"
         const val PREF_searchSS = "searchSS"
         const val PREF_viewuser = "viewuser"
+        const val PREF_viewNkk = "NagerK"
         const val PREF_deletess = "deletess"
         const val PREF_dashboard = "dashboard"
         const val PREF_getExcel = PREF_base_url + "getExcel"
@@ -24,6 +27,13 @@ object ApiContants {
         const val PREF_ser_req_status = "ser_req_status"
         const val PREF_winner_list = "winner_list"
         const val PREF_privacypolicy = "https://www.rss.org/"
+
+        const val PREF_GET_NKK = "NagerK"
+
+        const val shakhaDetails = "shakhaDetails"
+        const val daitva = "daitva"
+
+        const val PREF_getNkkDoc = PREF_base_url + "getNkkDoc"
 
         const val PREF_UserAPI = "userAPI"
         const val PREF_ClinicAPI = "clinicAPI"
@@ -42,6 +52,8 @@ object ApiContants {
         const val PREF_USER_ID = "USER_ID"
         const val PREF_USER_SHAKA = "USER_SHAKA"
         const val PREF_STATUS = "PREF_STATUS"
+        const val PREF_role = "PREF_role"
+        const val PREF_nager = "PREF_nager"
 
         const val PREF_city = "city"
         const val PREF_pin = "pin"

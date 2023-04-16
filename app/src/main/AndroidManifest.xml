@@ -39,6 +39,12 @@
             android:name=".activity.AttendanceFormActivity"
             android:exported="false" />
         <activity
+            android:name=".activity.NkkListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.NKKForm"
+            android:exported="false" />
+        <activity
             android:name="com.rss.suchi.MainActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustPan" />

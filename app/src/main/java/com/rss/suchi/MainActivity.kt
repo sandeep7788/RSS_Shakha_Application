@@ -4,6 +4,7 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -11,6 +12,7 @@ import android.os.AsyncTask
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
+import android.view.ContextThemeWrapper
 import android.view.Gravity
 import android.view.View
 import android.view.WindowManager
@@ -46,6 +48,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.io.IOException
+import java.util.concurrent.ExecutionException
 
 
 class MainActivity : AppCompatActivity(), DashboardAdapter.MyAdapterListener {
@@ -73,6 +76,11 @@ class MainActivity : AppCompatActivity(), DashboardAdapter.MyAdapterListener {
         progressDialog!!.titleText = "Loading ..."
         progressDialog!!.setCancelable(false)
 
+        try {
+//            checkAndopenPlayStore()
+        } catch (e:Exception) {
+
+        }
 
 
         setData()
@@ -102,7 +110,8 @@ class MainActivity : AppCompatActivity(), DashboardAdapter.MyAdapterListener {
 //            "" + MyApplication.ReadStringPreferences(ApiContants.PREF_USER_NAME)
         binding.txtName.text = "" + MyApplication.ReadStringPreferences(ApiContants.PREF_USER_NAME)
         binding.isMskUser = MyApplication.readBoolPreferences(ApiContants.isMskUser)
-        binding.includeNavigation.isMskUser = MyApplication.readBoolPreferences(ApiContants.isMskUser)
+        binding.includeNavigation.isMskUser =
+            MyApplication.readBoolPreferences(ApiContants.isMskUser)
 
 //        if (MyApplication.readBoolPreferences(ApiContants.isMskUser)) {
 //            getFormListSize(MyApplication.ReadIntPreferences(ApiContants.PREF_USER_SHAKA)!!)
@@ -124,7 +133,7 @@ class MainActivity : AppCompatActivity(), DashboardAdapter.MyAdapterListener {
         }
     }
 
-    private fun showRecyclerView(status:Boolean) {
+    private fun showRecyclerView(status: Boolean) {
         if (status) {
             binding.recyclerView.visibility = View.VISIBLE
             binding.scrollView.visibility = View.GONE
@@ -246,6 +255,10 @@ class MainActivity : AppCompatActivity(), DashboardAdapter.MyAdapterListener {
         binding.includeNavigation.layoutSearch.setOnClickListener {
             startActivity(Intent(this@MainActivity, ShakaUserSearchActivity::class.java))
         }
+
+//        binding.includeNavigation.layoutNkk.setOnClickListener {
+//            startActivity(Intent(this@MainActivity, NkkListActivity::class.java))
+//        }
     }
 
     override fun onBackPressed() {
@@ -272,13 +285,18 @@ class MainActivity : AppCompatActivity(), DashboardAdapter.MyAdapterListener {
     }
 
 
-    private fun getDashboardData(flag_id: Int, flagType: String,) {
+    private fun getDashboardData(flag_id: Int, flagType: String) {
         progressDialog!!.show()
 
         val apiService: ApiInterface =
             RestClient().getClient(context)!!.create(ApiInterface::class.java)
         val call: Call<JsonObject> =
-            apiService.dashboard(2,MyApplication.ReadIntPreferences(ApiContants.PREF_USER_ID),flagType,flag_id)
+            apiService.dashboard(
+                2,
+                MyApplication.ReadIntPreferences(ApiContants.PREF_USER_ID),
+                flagType,
+                flag_id
+            )
         call.enqueue(object : Callback<JsonObject?> {
             override fun onResponse(
                 call: Call<JsonObject?>,
@@ -293,14 +311,15 @@ class MainActivity : AppCompatActivity(), DashboardAdapter.MyAdapterListener {
                             JSONObject(response.body().toString()).getJSONObject("data")
 
                         if (jsonObject.has("total_shaka")) {
-                /*            var totalSevak = jsonObject.getInt("toatl_swayam_sevak").toString()
-                            binding.txtTotalShaka.text = jsonObject.getInt("total_shaka").toString()
-                            binding.txtTotalSwayamSevak.text = totalSevak
-                            binding.txtPresent.text = jsonObject.getInt("present").toString()*/
+                            /*            var totalSevak = jsonObject.getInt("toatl_swayam_sevak").toString()
+                                        binding.txtTotalShaka.text = jsonObject.getInt("total_shaka").toString()
+                                        binding.txtTotalSwayamSevak.text = totalSevak
+                                        binding.txtPresent.text = jsonObject.getInt("present").toString()*/
 
 
                             var totalSevak = jsonObject.getInt("total").toString()
-                            binding.txtTotalShaka.text = jsonObject.getString("shakha_name").toString()
+                            binding.txtTotalShaka.text =
+                                jsonObject.getString("shakha_name").toString()
                             binding.txtTotalSwayamSevak.text = totalSevak
 //                            binding.txtPresent.text = jsonObject.getInt("present").toString()
                         } else showErrorDialog()
@@ -441,7 +460,7 @@ class MainActivity : AppCompatActivity(), DashboardAdapter.MyAdapterListener {
         if (resultCode == IS_FROM_ADVANCE_DASHBOARD) {
             showRecyclerView(true)
             setData()
-        }else if (resultCode == RESULT_OK) {
+        } else if (resultCode == RESULT_OK) {
             setData()
         }
     }
@@ -541,15 +560,22 @@ class MainActivity : AppCompatActivity(), DashboardAdapter.MyAdapterListener {
         val apiService: ApiInterface =
             RestClient().getClient2(context)!!.create(ApiInterface::class.java)
         val call: Call<DashBoardMainModel> =
-            apiService.dashboardList(apiId, MyApplication.ReadIntPreferences(ApiContants.PREF_USER_ID), flagType, flag_id.toInt())
+            apiService.dashboardList(
+                apiId,
+                MyApplication.ReadIntPreferences(ApiContants.PREF_USER_ID),
+                flagType,
+                flag_id.toInt()
+            )
         call.enqueue(object : Callback<DashBoardMainModel?> {
             override fun onResponse(
                 call: Call<DashBoardMainModel?>,
                 response: Response<DashBoardMainModel?>
             ) {
+
                 Log.e(TAG, "onResponse:1 " + response.body().toString())
                 try {
                     list.clear()
+                    adapter!!.setFlagId(apiId.toString())
                     if (response.isSuccessful && response.body() != null) if (response.isSuccessful && response.body() != null && response.body()?.data != null) {
 
                         for (i in 0 until response.body()?.data?.size!!) {
@@ -557,6 +583,7 @@ class MainActivity : AppCompatActivity(), DashboardAdapter.MyAdapterListener {
                         }
                         if (response.body() == null) {
                             adapter!!.setData(ArrayList<DashboardNewListModel>())
+
                             Utility.showDialog(
                                 context,
                                 SweetAlertDialog.WARNING_TYPE,
@@ -600,19 +627,125 @@ class MainActivity : AppCompatActivity(), DashboardAdapter.MyAdapterListener {
 
 
     var IS_FROM_ADVANCE_DASHBOARD = 1111
-    override fun onContainerClick(flag_id: Int, flagType: String, isChangeApi:Boolean) {
+    override fun onContainerClick(flag_id: Int, flagType: String, isChangeApi: Boolean) {
         if (isChangeApi) {
 //            showRecyclerView(false)
 //            getFormListSize(MyApplication.ReadIntPreferences(ApiContants.PREF_USER_SHAKA)!!)
 //            getDashboardData(flag_id, flagType)
             var intent = Intent(this@MainActivity, ShakaLisActivity::class.java)
-            intent.putExtra("flag_id",flag_id.toInt())
-            intent.putExtra("flagType",flagType)
-            startActivityForResult(intent,IS_FROM_ADVANCE_DASHBOARD)
+            intent.putExtra("flag_id", flag_id.toInt())
+            intent.putExtra("flagType", flagType)
+            startActivityForResult(intent, IS_FROM_ADVANCE_DASHBOARD)
 
         } else {
             listForManage.add(DataForManageBackPress(flag_id, flagType))
             getDashboardListData(flag_id, flagType)
         }
     }
+
+    fun checkAndopenPlayStore() {
+
+        val versionChecker = VersionChecker()
+
+        try {
+            val latestVersion = versionChecker.execute().get()
+            val versionName = BuildConfig.VERSION_NAME.replace("-DEBUG", "")
+
+            if (latestVersion != null && !latestVersion.isEmpty()) {
+                if (!latestVersion.equals(versionName)) {
+                    showDialogToSendToPlayStore(latestVersion.toString())
+                }
+            }
+        } catch (e: InterruptedException) {
+            e.printStackTrace();
+        } catch (e: ExecutionException) {
+            e.printStackTrace();
+        }
+    }
+
+    fun showDialogToSendToPlayStore(ver:String) {
+        val alertDialogBuilder = AlertDialog.Builder(
+            ContextThemeWrapper(
+                context,
+                R.style.DialogTheme
+            )
+        )
+        alertDialogBuilder.setTitle(context.getString(R.string.youAreNotUpdatedTitle))
+        alertDialogBuilder.setMessage(
+            context.getString(R.string.youAreNotUpdatedMessage) + " " + ver + context.getString(
+                R.string.youAreNotUpdatedMessage1
+            )
+        )
+        alertDialogBuilder.setCancelable(false)
+        alertDialogBuilder.setPositiveButton(R.string.update,
+            DialogInterface.OnClickListener { dialog, id ->
+                context.startActivity(
+                    Intent(
+                        Intent.ACTION_VIEW,
+                        Uri.parse("market://details?id=" + context.packageName)
+                    )
+                )
+                dialog.cancel()
+            })
+        alertDialogBuilder.show()
+    }
+
+    inner class VersionChecker : AsyncTask<String, String, String>() {
+
+        override fun doInBackground(vararg p0: String?): String {
+            var newVersion = ""
+
+            try {
+
+//                newVersion = Jsoup.connect("https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID + "&hl=en")
+//                    .timeout(30000)
+//                    .userAgent("Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6")
+//                    .referrer("http://www.google.com")
+//                    .get()
+//                    .select("div[itemprop=softwareVersion]")
+//                    .first()
+//                    .ownText();
+
+                val curVersion = packageManager.getPackageInfo(packageName, 0).versionName
+                var newVersion = curVersion
+                newVersion =
+                    Jsoup.connect("https://play.google.com/store/apps/details?id=$packageName&hl=en")
+                        .timeout(30000)
+                        .userAgent("Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6")
+                        .referrer("http://www.google.com")
+                        .get()
+                        .select("div.hAyfc:nth-child(4) .IQ1z0d .htlgb")
+                        .first()
+                        .ownText()
+                Log.d("Curr Version", curVersion)
+                Log.d("New Version", newVersion)
+
+                newVersion = newVersion;
+//                    val document =
+//                    Jsoup.connect("https://play.google.com/store/apps/details?id=" + "com.rss.suchi" + "&hl=en")
+//                        .timeout(10000)
+//                        .userAgent("Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6")
+//                        .referrer("http://www.google.com")
+//                        .get()
+//
+//                if (document != null) {
+//                    val element = document.getElementsContainingOwnText("Current Version")
+//                    for (ele in element) {
+//                        if (ele.siblingElements() != null) {
+//                            val sibElemets = ele.siblingElements()
+//                            for (sibElemet in sibElemets) {
+//                                newVersion = sibElemet.text()
+//                            }
+//                        }
+//                    }
+//                }
+                return newVersion;
+            } catch (e: Exception) {
+                return "";
+            }
+
+        }
+
+    }
+
 }

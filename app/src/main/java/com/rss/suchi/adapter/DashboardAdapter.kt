@@ -2,11 +2,14 @@ package com.rss.suchi.adapter
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.rss.suchi.R
+import com.rss.suchi.activity.NkkListActivity
 import com.rss.suchi.databinding.AdapterDashboardLayoutBinding
 import com.rss.suchi.model.DashboardNewListModel
 import com.rss.suchi.model.ShakaUser
@@ -18,6 +21,7 @@ class DashboardAdapter(var activity: Activity, var listener: MyAdapterListener) 
     private var mOptionList: ArrayList<DashboardNewListModel> =
         java.util.ArrayList<DashboardNewListModel>()
     val REQUEST_CODE = 1
+    private var flagId="";
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DashboardAdapter.ViewHolder {
 
@@ -103,15 +107,33 @@ class DashboardAdapter(var activity: Activity, var listener: MyAdapterListener) 
 
                 }
             }
+
+            Log.e("@@@@@@@@@", "onBindViewHolder: "+flagId )
+            if (flagId.equals("1")) {
+                holder.binding.nkk.visibility = View.VISIBLE
+            } else {
+                holder.binding.nkk.visibility = View.GONE
+            }
+
+            holder.binding.nkk.setOnClickListener {
+                context.startActivity(Intent(context, NkkListActivity::class.java))
+            }
+
         } catch (e: Exception) {
 
         }
+
+
 
     }
 
     fun setData(mOptionList: ArrayList<DashboardNewListModel>) {
         this.mOptionList = mOptionList
         notifyDataSetChanged()
+    }
+
+    fun setFlagId(flag_id: String) {
+        this.flagId =flag_id.toString()
     }
 
     fun updateList(list: ArrayList<DashboardNewListModel>) {

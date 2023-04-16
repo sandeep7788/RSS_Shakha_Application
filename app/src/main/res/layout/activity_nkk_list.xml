@@ -14,7 +14,7 @@
 
         <include
             android:id="@+id/toolbar"
-            layout="@layout/layout_toolbar_with_back_btn"
+            layout="@layout/layout_toolbar_nkk"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -50,7 +50,7 @@
                 android:fontFamily="@font/intel"
                 android:foregroundGravity="center"
                 android:gravity="center"
-                android:hint="नाम, नंबर से खोजे"
+                android:hint="नाम से खोजे"
                 android:imeOptions="actionDone"
                 android:inputType="textCapSentences"
                 android:paddingStart="@dimen/txt_15sp"

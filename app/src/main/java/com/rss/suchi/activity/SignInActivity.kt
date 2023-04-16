@@ -139,6 +139,14 @@ class SignInActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                                 ApiContants.PREF_USER_SHAKA,
                                 data.getInt("shaka")
                             )
+                            MyApplication.writeStringPreference(
+                                ApiContants.PREF_role,
+                                data.getString("role_name")
+                            )
+                            MyApplication.writeIntPreference(
+                                ApiContants.PREF_nager,
+                                data.getInt("nager")
+                            )
                             MyApplication.writeStringPreference(ApiContants.login, "true")
                             MyApplication.writeBoolPreference(ApiContants.isMskUser, data.getInt("shaka") > 0)
 

@@ -17,25 +17,20 @@
         android:elevation="4dp"
         android:orientation="vertical">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.8dp"
-            android:layout_marginBottom="4dp"
-            android:background="@color/black"
-            app:layout_constraintBottom_toBottomOf="parent" />
 
-        <ImageView
-            android:id="@+id/imageView"
+        <TextView
+            android:id="@+id/txtFirstChar"
             android:layout_width="75dp"
             android:layout_height="75dp"
             android:layout_gravity="center"
             android:layout_margin="8dp"
-            android:src="@drawable/unity"
+            android:background="@drawable/round_corner_shape"
             android:elevation="4dp"
             android:foregroundGravity="center"
             android:gravity="center"
             android:orientation="vertical"
             android:padding="8dp"
+            android:text="D"
             android:textColor="@color/theme_color"
             android:textSize="35dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -43,30 +38,6 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-
-        <TextView
-            android:id="@+id/nkk"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            android:background="@drawable/round_corner_shape"
-            android:backgroundTint="@color/theme_color"
-            android:elevation="4dp"
-            android:foregroundGravity="center"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:padding="8dp"
-            android:text="@string/nkk"
-            android:textColor="@color/white"
-            android:textSize="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
 
         <LinearLayout
             android:id="@+id/linearLayout"
@@ -80,8 +51,6 @@
             android:layout_marginBottom="1dp"
             android:orientation="vertical"
             android:paddingStart="8dp"
-            android:paddingTop="4dp"
-            android:paddingBottom="4dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -89,7 +58,7 @@
 
             <TextView
                 android:id="@+id/txt_name"
-                android:layout_width="150dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|left|left"
                 android:layout_marginTop="12dp"
@@ -97,14 +66,13 @@
                 android:fontFamily="@font/intel"
                 android:foregroundGravity="center|left"
                 android:gravity="center|left|left"
-                android:lines="2"
-                android:text="shdksahkds hdksahkdshdksahkdshdksahkdshdksahkd"
-                android:textSize="18dp"
+                android:lines="1"
+                android:text=""
                 android:textColor="@color/gpvch_black"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/txtTotalShaka"
+                android:id="@+id/txtMobile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|left"
@@ -114,12 +82,11 @@
                 android:foregroundGravity="center|left"
                 android:gravity="center|left"
                 android:lines="1"
-                android:text="shdksahkdshdksahkdshdksahkdshdksahkdshdksahkd"
-                android:textSize="16dp"
+                android:text=""
                 android:textColor="@color/black" />
 
             <TextView
-                android:id="@+id/txTotalSwayamSevak"
+                android:id="@+id/txtOccupation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|left"
@@ -129,26 +96,20 @@
                 android:foregroundGravity="center|left"
                 android:gravity="center|left"
                 android:lines="1"
-                android:text="shdksahkdshdksahkdshdksahkdshdksahkdshdksahkd"
-                android:textSize="16dp"
+                android:text=""
                 android:textColor="@color/black" />
 
-            <TextView
-                android:id="@+id/txtPresent"
+            <View
+                android:id="@+id/txtPreRespon"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center|left"
-                android:layout_marginTop="4dp"
+                android:layout_height="0.8dp"
+                android:background="@color/theme_color"
+                android:layout_gravity="center|bottom"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="12dp"
-                android:fontFamily="@font/intel"
+                android:layout_marginBottom="4dp"
                 android:foregroundGravity="center|left"
-                android:gravity="center|left"
-                android:lines="1"
-                android:text="0"
-                android:textSize="16dp"
-                android:layout_marginBottom="12dp"
-                android:textColor="@color/black" />
-
+                android:gravity="center|bottom"/>
 
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

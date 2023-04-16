@@ -14,8 +14,11 @@ android {
         applicationId "com.rss.suchi"
         minSdk 21
         targetSdk 32
-        versionCode 11
-        versionName "11.1"
+//        versionCode 11
+//        versionName "11.1"
+
+        versionCode 10
+        versionName "10.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
